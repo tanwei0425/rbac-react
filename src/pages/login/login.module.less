@@ -1,0 +1,59 @@
+@title: login;
+
+.@{title} {
+
+  &-form {
+    border-radius: 10px;
+    padding      : 16px 42px;
+    width        : 400px;
+    position     : fixed;
+    top          : 50%;
+    left         : 50%;
+    transform    : translate(-50%, -50%);
+    background   : rgba(255, 255, 255, 0.7);
+    z-index      : 3;
+
+    &-logo {
+      display        : flex;
+      justify-content: center;
+      align-items    : center;
+
+      &-icon {
+        font-size : 65px;
+        margin-top: -10px;
+      }
+
+      &-text {
+        display       : inline-block;
+        height        : 32px;
+        margin        : 12px 0 0 0;
+        color         : #242424;
+        font-weight   : 600;
+        font-size     : 22px;
+        line-height   : 30px;
+        vertical-align: middle;
+        white-space   : nowrap;
+      }
+    }
+
+    &-captcha {
+      width : 100%;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    &-button-submit {
+      margin: 5px 0 5px 0;
+    }
+
+    &-button-register {
+      margin-top: 8px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .@{title}-form {
+    width: 350px;
+  }
+}

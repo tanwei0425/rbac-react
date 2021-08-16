@@ -1,0 +1,75 @@
+@title: meteor-shower;
+
+.@{title} {
+    height: 100vh;
+    width : 100vw;
+
+    &-bg {
+        background: url(../../static/images/bg2.jpg) no-repeat center/cover;
+        overflow  : hidden;
+        height    : 100%;
+
+        &-info {
+            height: 0;
+
+            &-rain {
+                cursor          : pointer;
+                user-select     : none;
+                display         : block;
+                width           : 8px;
+                border-radius   : 50%;
+                background      : #fff;
+                top             : 100px;
+                left            : 400px;
+                position        : relative;
+                transform-origin: 100% 0;
+                animation       : star-opacity 10s infinite ease-in, star-pos 10s infinite ease-in;
+                box-shadow      : 0 0 8px 8px rgba(255, 255, 255, 0.3);
+                opacity         : 0;
+                z-index         : 2;
+            }
+
+            &-rain:after {
+                content         : '';
+                display         : block;
+                top             : 0;
+                left            : 4px;
+                border          : 0 solid #fff;
+                border-width    : 0 90px 2px;
+                border-color    : transparent transparent transparent rgba(255, 255, 255, 0.3);
+                transform       : rotate(-45deg) translate3d(1px, 3px, 0);
+                box-shadow      : 0 0 1px 0 rgba(255, 255, 255, 0.1);
+                transform-origin: 0% 100%;
+            }
+        }
+    }
+
+}
+
+@keyframes star-opacity {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes star-pos {
+    0% {
+        transform: scale(0) rotate(0) translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: scale(1) rotate(0) translate3d(-450px, 450px, 0);
+    }
+}

@@ -1,0 +1,82 @@
+{
+  "name": "tw-rbac-react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node color && react-app-rewired start",
+    "build:dev": "node color && env-cmd -e development react-app-rewired build",
+    "build:test": "node color && env-cmd -e test react-app-rewired build",
+    "build": "node color && env-cmd -e production react-app-rewired build",
+    "analyze": "source-map-explorer build/static/js/*.js",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  },
+  "dependencies": {
+    "@loadable/component": "^5.15.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "ahooks": "^2.10.5",
+    "antd": "^4.16.2",
+    "axios": "^0.21.1",
+    "classnames": "^2.3.1",
+    "crypto-js": "^4.1.1",
+    "env-cmd": "^10.1.0",
+    "history": "^5.0.0",
+    "jsencrypt": "^3.2.1",
+    "less": "^3.12.2",
+    "less-loader": "^7.1.0",
+    "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
+    "rc-queue-anim": "^1.8.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-draggable": "^4.4.3",
+    "react-helmet": "^6.1.0",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^2.5.2",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.2",
+    "@babel/plugin-proposal-do-expressions": "^7.14.0",
+    "@babel/plugin-proposal-function-bind": "^7.12.13",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.2",
+    "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "antd-theme-generator": "^1.2.8",
+    "babel-plugin-import": "^1.13.3",
+    "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
+    "filemanager-webpack-plugin": "^5.0.0",
+    "http-proxy-middleware": "^2.0.0",
+    "mockjs": "^1.1.0",
+    "react-app-polyfill": "^2.0.0",
+    "react-app-rewired": "^2.1.8",
+    "redux-devtools-extension": "^2.13.9"
+  }
+}

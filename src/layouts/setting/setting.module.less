@@ -1,0 +1,130 @@
+@title: t-layout-setting;
+
+.@{title} {
+    position        : absolute;
+    z-index         : 998;
+    top             : 26%;
+    background-color: var(--primary-color);
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    width           : 48px;
+    height          : 48px;
+    font-size       : 20px;
+    color           : #fff;
+    border-radius   : 2px;
+    cursor          : pointer;
+    right           : 0px;
+
+    &-true {
+        right: 300px;
+    }
+
+    transition: right 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
+
+    &-oveStyle {
+
+        &-content {
+            padding-top: 12px;
+            display    : flex;
+        }
+
+
+        &-item,
+        &-itemBlack {
+            position        : relative;
+            margin-right    : 16px;
+            box-shadow      : 0 1px 2.5px 0 rgba(0, 0, 0, .18);
+            border-radius   : 4px;
+            overflow        : hidden;
+            cursor          : pointer;
+            width           : 44px;
+            height          : 36px;
+            background-color: #f0f2f5;
+
+            &-span {
+                position              : absolute;
+                bottom                : 4px;
+                right                 : 6px;
+                color                 : #1890ff;
+                font-weight           : 700;
+                font-size             : 14px;
+                pointer-events        : none;
+                font-style            : normal;
+                line-height           : 0;
+                text-align            : center;
+                text-transform        : none;
+                vertical-align        : -.125em;
+                text-rendering        : optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+
+        &-item:before,
+        &-itemBlack:before {
+            position        : absolute;
+            top             : 0;
+            left            : 0;
+            width           : 33%;
+            height          : 100%;
+            background-color: #fff;
+            content         : "";
+        }
+
+        &-itemBlack:before {
+            background-color: #242424;
+            z-index         : 1;
+        }
+
+        &-item:after,
+        &-itemBlack:after {
+            position        : absolute;
+            top             : 0;
+            left            : 0;
+            width           : 100%;
+            height          : 25%;
+            background-color: #fff;
+            content         : "";
+        }
+    }
+
+    // 导航模式
+    &-navMode {
+        margin-bottom: 0;
+        font-size    : 15px;
+
+        &-item {
+            border: none;
+            width : 252px;
+
+        }
+    }
+
+    // 主题
+    &-theme,
+    &-oveStyle {
+        width: 100%;
+
+        &-title {
+            margin-bottom: 0;
+            font-size    : 15px;
+        }
+
+        &-color {
+            width      : 100%;
+            padding-top: 12px;
+
+            &-tag {
+                width : 23px;
+                height: 23px;
+                cursor: pointer !important;
+
+                margin-bottom: 7px;
+
+                &-icon {
+                    margin-left: -2px;
+                }
+            }
+        }
+    }
+}

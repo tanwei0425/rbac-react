@@ -1,0 +1,187 @@
+body {
+  // min-width: 990px;
+
+  margin        : 0;
+  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //   sans-serif;
+  overflow-x    : auto;
+  overflow-y    : hidden;
+
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// antd 全局样式覆盖
+.ant-input-prefix {
+  margin-right: 8px !important;
+}
+
+.ant-input-suffix {
+  font-size: 18px !important;
+}
+
+// antd upload picture-card 样式重写
+.t-upload-picture-card {
+  div.ant-upload {
+    display: inline-block;
+    width  : 104px;
+    height : 104px;
+    margin : 0 8px 8px 0;
+
+    .ant-upload-drag-icon {
+      margin-bottom: 8px;
+
+      svg {
+        width : 0.8em;
+        height: 0.8em;
+      }
+    }
+
+    .ant-upload-text {
+      font-size: 14px;
+    }
+  }
+
+  span.ant-upload {
+    padding: 0 !important;
+  }
+}
+
+// 解决重置menu宽度后 引发的晃动问题
+.ant-menu-inline-collapsed>.ant-menu-item,
+.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title {
+  padding-left: 22px !important;
+}
+
+// 布局
+.t-layout-setting-space.ant-space {
+  .ant-space-item-split {
+    margin-bottom: 0 !important;
+    width        : 100%;
+
+
+  }
+
+
+  .ant-space-item {
+    margin-bottom: 0 !important;
+
+    .ant-list-header {
+      padding-top: 0;
+    }
+  }
+}
+
+
+
+// 在加载页面强制蓝色（防止加载颜色主题闪烁问题）
+.globalSysStartUp {
+  .ant-spin {
+    .ant-spin-dot {
+      .ant-spin-dot-item {
+        background-color: #1890ff !important;
+      }
+    }
+
+    .ant-spin-text {
+      color: #1890ff !important;
+    }
+  }
+}
+
+// 在登录页面强制蓝色（防止加载颜色主题闪烁问题）
+#loginForm {
+  .ant-row {
+
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-focused,
+    .ant-input-affix-wrapper:hover {
+      border-color: #1890ff !important;
+      box-shadow  : 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+    }
+  }
+
+  .ant-btn-primary {
+    margin      : 5px 0 5px 0;
+    background  : #1890ff !important;
+    border-color: #1890ff !important;
+  }
+}
+
+
+// 全局modal样式调整
+@title: t-modal;
+
+.@{title} {
+  width : 100vw;
+  height: 100vh;
+
+  .ant-modal-content {
+    .ant-modal-body {
+      overflow-y  : auto;
+      max-height  : 65vh;
+      margin-right: 2px;
+    }
+  }
+}
+
+// 全局搜索样式调整
+.t-search-form-class {
+  width           : 100%;
+  padding         : 16px;
+  padding-bottom  : 0;
+  margin-bottom   : 16px;
+  background-color: #fff;
+
+  .serachFormItem {
+    width         : 260px;
+    padding-bottom: 16px;
+  }
+
+  .searchFormBut {
+    padding-bottom: 16px;
+  }
+}
+
+// 全局table样式调整
+.t-table {
+  width           : 100%;
+  padding         : 0 16px;
+  background-color: #fff;
+
+  .ant-table-title {
+    padding: 16px 0 !important;
+  }
+
+  .ant-table-container {
+
+    .ant-table-tbody {
+      .tableActionsRenderButton {
+        margin-right : 8px;
+        margin-bottom: 2px;
+        margin-top   : 2px;
+      }
+
+      .tableActionsRenderButton:last-child {
+        margin-right: 0 !important;
+      }
+
+    }
+  }
+
+  .ant-table-pagination-right {
+    margin-right: 20px !important;
+  }
+}
+
+.t-login {
+  .ant-form-item {
+    margin-bottom: 14px;
+  }
+}
