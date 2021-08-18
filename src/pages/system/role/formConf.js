@@ -69,6 +69,7 @@ const FormConf = (modalChange, transferChange) => {
         {
             title: '角色名称',
             dataIndex: 'name',
+            fixed: 'left',
         },
         {
             title: '状态',

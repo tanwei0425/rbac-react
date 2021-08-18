@@ -4,6 +4,7 @@ const defaultConfig = {
     autoComplete: 'off',
     allowClear: true,
     placeholder: "请输入",
+    maxLength: 50,
 };
 const Index = (filedProps) => {
     return (
@@ -19,12 +20,12 @@ const TextArea = (filedProps) => {
     return (
         <Input.TextArea
             showCount={true}
-            maxLength={500}
             autoSize={{
                 minRows: 2,
                 maxRows: 5,
             }}
             {...defaultConfig}
+            maxLength={500}
             {...filedProps}
         />
     );

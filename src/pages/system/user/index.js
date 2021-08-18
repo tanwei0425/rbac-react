@@ -152,6 +152,7 @@ const Index = () => {
                 loading={tableRequestRes.loading}
                 title={() => '用户管理列表'}
                 onChange={onChange}
+                scroll={{ x: 1000 }}
                 toolBarRender={() => [
                     <WrapperButton
                         type={'primary'}

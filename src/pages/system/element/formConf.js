@@ -103,6 +103,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         {
             title: '元素名称',
             dataIndex: 'name',
+            fixed: 'left',
         },
         {
             title: '元素编码',

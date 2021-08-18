@@ -103,6 +103,7 @@ const FormConf = (modalChange) => {
         {
             title: '用户名称',
             dataIndex: 'username',
+            fixed: 'left',
         },
         {
             title: '真实姓名',

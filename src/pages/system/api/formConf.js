@@ -123,6 +123,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         {
             title: '接口名称',
             dataIndex: 'name',
+            fixed: 'left',
         },
         {
             title: '路径',
