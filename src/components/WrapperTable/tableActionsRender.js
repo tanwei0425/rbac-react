@@ -14,13 +14,19 @@ import {
 import classnames from 'classnames';
 import WrapperButton from '@/components/WrapperButton';
 import WrapperDropdown from '@/components/WrapperDropdown';
-
+import { useSelector } from 'react-redux';
+import { authority } from '@/utils/utils';
 const Index = ({ data = [], record, isMoRe = true, maxShowNum = 3, }) => {
     const defaultSize = 'small';
+    const { userInfo } = useSelector((state) => state.common);
     const [buttonsArrData, setButtonsArrData] = useState([]);
     const [moreButtonsData, setMoreButtonsData] = useState([]);
     useEffect(() => {
-        const showButtonsArr = data?.filter(val => !val?.isHide) || [];
+        // 按钮没有权限和隐藏的按钮不渲染
+        const showButtonsArr = data?.filter(val => !val?.isHide && authority({
+            dataSource: userInfo?.elements,
+            target: val.authButStatus
+        })) || [];
         if (isMoRe) {
             const buttonsArr = [];
             const moreButtonsArr = [];
@@ -37,8 +43,6 @@ const Index = ({ data = [], record, isMoRe = true, maxShowNum = 3, }) => {
             setButtonsArrData(showButtonsArr);
         }
     }, []);
-    console.log(buttonsArrData, 'buttonsArrData');
-    console.log(moreButtonsData, 'moreButtonsData');
     return (
         <>
             {buttonsArrData?.map(val => {

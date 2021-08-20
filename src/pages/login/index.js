@@ -61,15 +61,16 @@ const Login = props => {
         if (token) {
             window.message.warning('帐号已登录,请先退出');
             navigate('/');
+        } else {
+            getCaptcha();
         }
-        getCaptcha();
     }, []);
 
     const getCaptcha = async () => {
         const res = await captchaRes.run({
             uuid
         });
-        if (res.code === 200) {
+        if (res?.code === 200) {
             setSvgCaptcha(res.data.captcha);
             setUuid(res.data.uuid);
         }

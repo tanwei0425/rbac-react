@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Row, Menu, Col, Checkbox, Spin } from "antd";
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -31,6 +31,7 @@ const UseHeader = () => {
 
     const { collapsed, navigationMode, userInfo } = useSelector((state) => state.common);
     const [modalType, setModalType] = useState('');
+    const [menuItemData, setMenuItemData] = useState({});
     const [dropVisible, setDropVisible] = useState(false);
     const iniModalConifg = {
         title: '操作',
@@ -40,32 +41,45 @@ const UseHeader = () => {
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
     const signOutRequest = useRequest(commonRequest.signOut, { manual: true, });
     const updatePasswordRequest = useRequest(commonRequest.updatePassword, { manual: true, });
+    useEffect(() => {
+        setMenuItemData({
+            username: userInfo?.username,
+            roles: userInfo?.roles?.map((val, index) => {
+                if (index + 1 !== userInfo?.roles?.length) {
+                    val.name = val?.name + '，';
+                }
+                return val?.name;
+            }),
+            orgName: userInfo?.orgName,
+            name: userInfo?.name,
+        });
 
+    }, []);
     const menuActonsChange = (e) => setSkin('displaySystemConfig', e.target.checked, `系统风格设置${e.target.checked ? '开启' : '关闭'}`);
     const menu =
         <Menu>
             <Menu.Item key="0" className={styles['t-layout-item']}>
                 <p className={styles['t-layout-info-header-setting-item-name']}>
                     <UserOutlined className={styles['t-layout-info-header-setting-item-icon']} />
-                    用户名称：<span className={styles['t-layout-info-header-setting-item-name-text']}>{userInfo?.username}</span>
+                    用户名称：<span className={styles['t-layout-info-header-setting-item-name-text']}>{menuItemData.username}</span>
                 </p>
             </Menu.Item>
             <Menu.Item key="1" className={styles['t-layout-info-header-setting-item']}>
                 <p className={styles['t-layout-info-header-setting-item-name']}>
                     <IdcardOutlined className={styles['t-layout-info-header-setting-item-icon']} />
-                    角色类型：<span className={styles['t-layout-info-header-setting-item-name-text']}>{userInfo?.roles?.map(val => val?.name)}</span>
+                    角色类型：<span className={styles['t-layout-info-header-setting-item-name-text']}>{menuItemData.roles}</span>
                 </p>
             </Menu.Item>
             <Menu.Item key="2" className={styles['t-layout-info-header-setting-item']}>
                 <p className={styles['t-layout-info-header-setting-item-name']}>
                     <VerifiedOutlined className={styles['t-layout-info-header-setting-item-icon']} />
-                    组织机构：<span className={styles['t-layout-info-header-setting-item-name-text']}>{userInfo?.orgName}</span>
+                    组织机构：<span className={styles['t-layout-info-header-setting-item-name-text']}>{menuItemData.orgName}</span>
                 </p>
             </Menu.Item>
             <Menu.Item key="3" className={styles['t-layout-info-header-setting-item']}>
                 <p className={styles['t-layout-info-header-setting-item-name']}>
                     <CheckCircleOutlined className={styles['t-layout-info-header-setting-item-icon']} />
-                    真实姓名：<span className={styles['t-layout-info-header-setting-item-name-text']}>{userInfo?.name}</span>
+                    真实姓名：<span className={styles['t-layout-info-header-setting-item-name-text']}>{menuItemData.name}</span>
                 </p>
             </Menu.Item>
             <Menu.Divider />
@@ -225,7 +239,7 @@ const UseHeader = () => {
                 <Col span={navigationMode?.menuTrigger ? 22 : 24}>
                     <Row justify="end" align="middle">
                         <HeartIcon className={styles['t-layout-info-header-name']} />
-                        <span className={styles['t-layout-info-header-name']}>{userInfo?.username}</span>
+                        <span className={styles['t-layout-info-header-name']}>{menuItemData.username}</span>
                         <span
                             className={styles['t-layout-trigger-icon']}
                         >

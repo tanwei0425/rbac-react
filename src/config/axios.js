@@ -56,7 +56,7 @@ const axiosConfig = () => {
                 clearAllLocalStorage();
                 setTimeout(() => {
                     window.location.href = '/login';
-                }, 1500);
+                }, 1000);
             }
             return data;
         },
