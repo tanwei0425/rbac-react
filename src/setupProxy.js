@@ -13,7 +13,8 @@ module.exports = function (app) {
     createProxyMiddleware(
       '/admin/v1',
       {
-        target: 'http://127.0.0.1:7002',
+        // target: 'http://127.0.0.1:7002',
+        target: 'https://api.hellotanwei.cn',
         // pathRewrite: { '^/open': '/open' },
         changeOrigin: true,
       })

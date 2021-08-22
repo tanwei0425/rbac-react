@@ -19,7 +19,7 @@ const axiosConfig = () => {
     axios.interceptors.request.use(
         (config) => {
             const token = getLocalStorageItem('token');
-            token && (config.headers.common['token'] = token);
+            token && (config.headers.common['authorization'] = token);
             config.baseURL = process.env.REACT_APP_BASE_URL || '/';
             // oss 上传 域名修改
             if (config.url === '/ali/oss/get/signature') {
@@ -45,7 +45,7 @@ const axiosConfig = () => {
         (response) => {
             NProgress.done(); // 设置加载进度条(结束..)
             const { data, headers } = response;
-            const newToken = headers?.['token'];
+            const newToken = headers?.['authorization'];
             if (newToken) {
                 const oldToken = getLocalStorageItem('token');
                 newToken !== oldToken && setLocalStorageItem('token', `Bearer ${newToken}`);

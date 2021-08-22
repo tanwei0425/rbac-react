@@ -8,9 +8,9 @@
  */
 module.exports = {
     "development": {
-        "REACT_APP_BASE_URL": `https://open-api.trsafety.com`,
+        "REACT_APP_BASE_URL": `https://api.hellotanwei.cn`,
         "REACT_APP_ALI_OSS_URL": `https://file-api.trsafety.com`,
-        "REACT_APP_SOCKET_URL": `development:SOCKET_URL`,
+        "REACT_APP_SOCKET_URL": `ws://api.hellotanwei.cn`,
     },
     "test": {
         "REACT_APP_BASE_URL": `https://open-api.trsafety.com`,
@@ -18,8 +18,8 @@ module.exports = {
         "REACT_APP_SOCKET_URL": `test:SOCKET_URL`,
     },
     "production": {
-        "REACT_APP_BASE_URL": `https://open-api.trsafety.com`,
-        "REACT_APP_ALI_OSS_URL": `https://file-api.trsafety.com`,
-        "REACT_APP_SOCKET_URL": `production:SOCKET_URL`,
+        "REACT_APP_BASE_URL": `https://api.hellotanwei.cn`,
+        "REACT_APP_ALI_OSS_URL": `https://file-api.hellotanwei.cn`,
+        "REACT_APP_SOCKET_URL": `ws://api.hellotanwei.cn`,
     },
 }
