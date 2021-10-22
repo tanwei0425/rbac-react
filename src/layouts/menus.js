@@ -37,7 +37,6 @@ const Menus = ({ collapsed }) => {
 
     // 只展开当前父级菜单
     const onOpenChange = (keys) => {
-        console.log(keys, 'keys');
         const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
             setOpenKeys(keys);
@@ -76,11 +75,8 @@ const Menus = ({ collapsed }) => {
 
 
     useEffect(() => {
-        console.log(menusList, 'menusList');
         const newMenuTree = arrayToTree(menusList);
-        console.log(newMenuTree, 'newMenuTree');
         const showMenuTree = newMenuTree?.filter(val => val.isShow === '1');
-        console.log(showMenuTree, 'showMenuTree');
         setMenuTree(showMenuTree);
     }, []);
 

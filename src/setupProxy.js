@@ -11,10 +11,10 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function (app) {
   app.use(
     createProxyMiddleware(
-      '/admin/v1',
+      ['/admin/v1'],
       {
-        // target: 'http://127.0.0.1:7002',
-        target: 'https://api.hellotanwei.cn',
+        target: 'http://127.0.0.1:7002',
+        // target: 'https://api.hellotanwei.cn',
         // pathRewrite: { '^/open': '/open' },
         changeOrigin: true,
       })

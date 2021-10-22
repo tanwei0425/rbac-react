@@ -19,6 +19,10 @@ const {
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require("path");
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+
+// 是否是本地开发start启动的
+const isBuild = process.env.NODE_ENV === 'production';
 
 module.exports = override(
     // useEslintRc(),
@@ -79,12 +83,28 @@ module.exports = override(
         new FileManagerPlugin({
             events: {
                 onEnd: {
-                    delete: ['./build.zip'],
+                    delete: ['./build/build.zip'],
                     archive: [
-                        { source: './build', destination: './build.zip' },
+                        { source: './build', destination: './build/build.zip' },
                     ],
                 },
             }
+        }),
+
+        isBuild &&
+        new CompressionPlugin({
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$'  //压缩 js 与 css
+            ),
+            threshold: 102400,// 大约100kb处理  单位b
+            minRatio: 0.8
         })
-    )
+    ),
+    (config) => {
+        // 正式环境去掉打包生产map文件
+        if (isBuild) config.devtool = false;
+        return config;
+    }
 );

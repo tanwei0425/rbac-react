@@ -27,7 +27,6 @@ const Index = () => {
         }
         const menusRes = await menus.run();
         if (menusRes?.code === 200) {
-            console.log(menusRes?.data, 'menusRes?.data');
             const menuList = menusRes?.data || [];
             dispatch(setMenusList([...menuList]));
         }

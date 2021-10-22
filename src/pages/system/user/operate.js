@@ -3,7 +3,6 @@ import WrapperForm, { FormItem, FormRenderComponent } from '@/components/FormEle
 import WrapperModal from '@/components/WrapperModal';
 
 const Index = ({ formSchema, roleAll, rolesLoading, modalType, tableRecord, formConfig, modalConfig }) => {
-    console.log(roleAll, 'roleAll');
     return (
         <WrapperModal
             {...modalConfig}

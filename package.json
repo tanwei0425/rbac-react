@@ -58,6 +58,7 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
+    "socket.io-client": "2.1.1",
     "source-map-explorer": "^2.5.2",
     "web-vitals": "^1.0.1"
   },
@@ -70,6 +71,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "antd-theme-generator": "^1.2.8",
     "babel-plugin-import": "^1.13.3",
+    "compression-webpack-plugin": "^8.0.1",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
     "filemanager-webpack-plugin": "^5.0.0",

@@ -7,13 +7,12 @@
  * @FilePath: /open-platform/src/pages/index/index.tsx
  */
 import React from 'react';
-
+import { Button } from 'antd';
 const Index = (props) => {
     return (
         <div style={{ height: '200vh' }}>
-            111
-            dasdasdsa
-            dasdasdas
+            <Button type='primary'>按钮1</Button>
+            <Button danger type='primary'>按钮2</Button>
         </div>
     );
 };
