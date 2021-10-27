@@ -266,6 +266,62 @@ const treeFind = (tree, func) => {
   }
   return null;
 };
+
+/**
+ * a标签导出
+ * @param {*} url 导出地址
+ */
+function exportFile(url) {
+  const a = document.createElement('a');
+  a.setAttribute('download', true);
+  a.setAttribute('href', url);
+  const aBody = document.body;
+  // IE 10以下不能直接a.click()，要把节点挂在dom上才能click执行
+  aBody.appendChild(a).click();
+  aBody.removeChild(a);
+}
+
+/**
+ * 二进制流导出
+ * @param {*} data 数据源
+ * @param {*} filename 文件名称
+ */
+function exportStreamFile(data, filename) {
+  try {
+    const arrayBuffer = base64ToArrayBuffer(data);
+    const blob = new Blob([arrayBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    if ('download' in document.createElement('a')) {
+      // 非IE下载
+      const elink = document.createElement('a');
+      elink.download = filename || '';
+      elink.style.display = 'none';
+      elink.href = URL.createObjectURL(blob);
+      document.body.appendChild(elink);
+      elink.click();
+      URL.revokeObjectURL(elink.href); // 释放URL 对象
+      document.body.removeChild(elink);
+    } else {
+      // IE10+下载
+      navigator.msSaveBlob(blob, filename || '');
+    }
+  } catch (error) {
+    console.error('导出异常');
+  }
+}
+/**
+ * base64转ArrayBuffer
+ * @param {*} base64 
+ * @returns ArrayBuffer
+ */
+function base64ToArrayBuffer(base64) {
+  var binary_string = window.atob(base64);
+  var len = binary_string.length;
+  var bytes = new Uint8Array(len);
+  for (var i = 0; i < len; i++) {
+    bytes[i] = binary_string.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
 export {
   getRandomNumberByRange,
   treeFindPath,
@@ -283,4 +339,7 @@ export {
   dateTimeFormat,
   formatOptions,
   treeFind,
+  exportFile,
+  exportStreamFile,
+  base64ToArrayBuffer,
 };

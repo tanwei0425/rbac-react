@@ -43,6 +43,11 @@ const getAllUser = () => ({
     method: 'get',
 });
 
+const exportUser = (data) => ({
+    url: `${servicesPath}/v1/user/export`,
+    method: 'get',
+    data,
+});
 export default {
     getUserTable,
     createUser,
@@ -51,4 +56,5 @@ export default {
     deleteUser,
     reloadPwd,
     getAllUser,
+    exportUser,
 };

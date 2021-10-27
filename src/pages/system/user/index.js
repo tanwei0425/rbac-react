@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
+import { DownloadOutlined } from '@ant-design/icons';
 import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
@@ -8,7 +9,7 @@ import request from '@/services/user';
 import roleRequest from '@/services/role';
 import Operate from './operate';
 import FormConf from './formConf';
-import { formatOptions } from '@/utils/utils';
+import { formatOptions, exportStreamFile } from '@/utils/utils';
 const Index = () => {
     const [form] = useForm();
     const [dataSource, setDataSource] = useState([]);
@@ -33,6 +34,7 @@ const Index = () => {
     const updateRequestRes = useRequest(request.updateUser, { manual: true });
     const deleteRequestRes = useRequest(request.deleteUser, { manual: true });
     const reloadRequestRes = useRequest(request.reloadPwd, { manual: true });
+    const exportUserRes = useRequest(request.exportUser, { manual: true });
     const allRoleRequestRes = useRequest(roleRequest.allRole, { manual: true });
 
     const getDetail = async (id) => {
@@ -133,6 +135,18 @@ const Index = () => {
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ ...values });
     };
+
+    const exportUser = async () => {
+        window.message.warning('数据导出用时较长，请到浏览器下载列表中查看！', 6);
+        const res = await exportUserRes.run(searchFormData);
+        try {
+            // 处理返回的文件流
+            exportStreamFile(res?.data, res?.filename);
+        } catch (error) {
+            window.message.error('导出异常');
+        }
+    };
+
     const { formSchema, searchFormSchema, columns } = FormConf(modalChange);
     return (
         <>
@@ -142,7 +156,7 @@ const Index = () => {
                 formSchema={searchFormSchema}
                 formConfig={{
                     name: 'userSearchForm',
-                    onFinish: onFinish
+                    onFinish,
                 }}
             />
             <WrapperTable
@@ -154,6 +168,14 @@ const Index = () => {
                 onChange={onChange}
                 scroll={{ x: 1000 }}
                 toolBarRender={() => [
+                    <WrapperButton
+                        type={'dashed'}
+                        authButStatus='export-user'
+                        icon={<DownloadOutlined />}
+                        onClick={exportUser}
+                    >
+                        导出用户
+                    </WrapperButton>,
                     <WrapperButton
                         type={'primary'}
                         authButStatus='add-user'

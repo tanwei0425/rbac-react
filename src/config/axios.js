@@ -13,6 +13,8 @@ import {
     setLocalStorageItem,
     clearAllLocalStorage,
 } from '@/utils/utils';
+// 处理导出、下载等特殊请求
+import { binaryStreamUrl } from './exportAxiosUrl';
 import { encryptRsa } from '@/utils/gas.jdk';
 
 const axiosConfig = () => {
@@ -25,6 +27,10 @@ const axiosConfig = () => {
             if (config.url === '/ali/oss/get/signature') {
                 config.baseURL = process.env.REACT_APP_ALI_OSS_URL || '/';
             }
+            // 二进制文件流请求更改responseType
+            const binaryStreamStatus = binaryStreamUrl.findIndex(val => val === config?.url);
+            binaryStreamStatus !== -1 && (config.responseType = 'blob');
+
             // 非对称加密,开发环境不启用
             if (
                 config.data
@@ -44,19 +50,35 @@ const axiosConfig = () => {
     axios.interceptors.response.use(
         (response) => {
             NProgress.done(); // 设置加载进度条(结束..)
-            const { data, headers } = response;
+            const { data, headers, config } = response;
             const newToken = headers?.['authorization'];
             if (newToken) {
                 const oldToken = getLocalStorageItem('token');
                 newToken !== oldToken && setLocalStorageItem('token', `Bearer ${newToken}`);
             }
-            data?.code !== 200 && window.message.error(data?.message);
+
+            const binaryStreamStatus = binaryStreamUrl.findIndex(val => val === config?.url);
+
+            if (data?.code !== 200 && binaryStreamStatus === -1) {
+                window.message.error(data?.message);
+            }
 
             if (data?.code === 901 || data?.code === 902 || data?.code === 903 || data?.code === 904) {
                 clearAllLocalStorage();
                 setTimeout(() => {
                     window.location.href = '/login';
                 }, 1000);
+            }
+            // 二进制文件流请求更改responseType
+            if (binaryStreamStatus !== -1) {
+                const contentDisposition = headers['content-disposition'];
+                let filename = contentDisposition?.split(";")[1]?.split("filename=")[1];
+                filename && (filename = decodeURIComponent(filename, "UTF-8"));
+                const resData = {
+                    filename,
+                    data,
+                };
+                return resData;
             }
             return data;
         },
