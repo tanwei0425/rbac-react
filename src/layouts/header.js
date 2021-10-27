@@ -11,7 +11,10 @@ import {
     CheckCircleOutlined,
     IdcardOutlined,
     VerifiedOutlined,
+    FullscreenExitOutlined,
+    FullscreenOutlined,
 } from '@ant-design/icons';
+import screenfull from 'screenfull';
 import { HeartIcon } from '@/static/Icon';
 import WrapperForm, { FormItem, useForm, FormRenderComponent } from '@/components/FormElements';
 import WrapperDropdown from '@/components/WrapperDropdown';
@@ -31,6 +34,7 @@ const UseHeader = () => {
 
     const { collapsed, navigationMode, userInfo } = useSelector((state) => state.common);
     const [modalType, setModalType] = useState('');
+    const [screenfullStatus, setScreenfullStatus] = useState(screenfull.isFullscreen);
     const [menuItemData, setMenuItemData] = useState({});
     const [dropVisible, setDropVisible] = useState(false);
     const iniModalConifg = {
@@ -166,6 +170,11 @@ const UseHeader = () => {
         form.resetFields();
     };
 
+    const toggleScreenfull = () => {
+        screenfull.toggle();
+        setScreenfullStatus(!screenfull.isFullscreen);
+    };
+
     const renderModalInfo = () => {
         if (modalType === 'editPwd') {
             const formSchema = [
@@ -224,7 +233,6 @@ const UseHeader = () => {
             return '是否确定退出登录？';
         }
     };
-
     return (
         <>
             <Row justify="space-between" align="middle">
@@ -240,6 +248,12 @@ const UseHeader = () => {
                     <Row justify="end" align="middle">
                         <HeartIcon className={styles['t-layout-info-header-name']} />
                         <span className={styles['t-layout-info-header-name']}>{menuItemData.username}</span>
+                        <span
+                            className={styles['t-layout-info-header-screenfull']}
+                            onClick={toggleScreenfull}
+                        >
+                            {screenfullStatus ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
+                        </span>
                         <span
                             className={styles['t-layout-trigger-icon']}
                         >
