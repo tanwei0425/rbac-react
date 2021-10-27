@@ -13,6 +13,7 @@ import {
     VerifiedOutlined,
     FullscreenExitOutlined,
     FullscreenOutlined,
+    GithubOutlined,
 } from '@ant-design/icons';
 import screenfull from 'screenfull';
 import { HeartIcon } from '@/static/Icon';
@@ -175,6 +176,10 @@ const UseHeader = () => {
         setScreenfullStatus(!screenfull.isFullscreen);
     };
 
+    const jumpGitHub = () => {
+        window.open("https://github.com/tanwei0425/tw-rbac-react");
+    };
+
     const renderModalInfo = () => {
         if (modalType === 'editPwd') {
             const formSchema = [
@@ -246,14 +251,22 @@ const UseHeader = () => {
                 </Col>}
                 <Col span={navigationMode?.menuTrigger ? 22 : 24}>
                     <Row justify="end" align="middle">
-                        <HeartIcon className={styles['t-layout-info-header-name']} />
-                        <span className={styles['t-layout-info-header-name']}>{menuItemData.username}</span>
+                        <span
+                            className={styles['t-layout-info-header-gitHub']}
+                            onClick={jumpGitHub}
+                        >
+                            <GithubOutlined />
+                        </span>
                         <span
                             className={styles['t-layout-info-header-screenfull']}
                             onClick={toggleScreenfull}
                         >
                             {screenfullStatus ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
                         </span>
+
+                        <HeartIcon className={styles['t-layout-info-header-heart']} />
+                        <span className={styles['t-layout-info-header-name']}>{menuItemData.username}</span>
+
                         <span
                             className={styles['t-layout-trigger-icon']}
                         >

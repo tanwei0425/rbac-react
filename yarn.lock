@@ -11167,15 +11167,10 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-screenfull@^5.0.0:
+screenfull@^5.0.0, screenfull@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/screenfull/-/screenfull-5.1.0.tgz#85c13c70f4ead4c1b8a935c70010dfdcd2c0e5c8"
   integrity sha512-dYaNuOdzr+kc6J6CFcBrzkLCfyGcMg+gWkJ8us93IQ7y1cevhQAugFsaCdMHb6lw8KV3xPzSxzH7zM1dQap9mA==
-
-screenfull@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.nlark.com/screenfull/download/screenfull-5.1.0.tgz#85c13c70f4ead4c1b8a935c70010dfdcd2c0e5c8"
-  integrity sha1-hcE8cPTq1MG4qTXHABDf3NLA5cg=
 
 scroll-into-view-if-needed@^2.2.25:
   version "2.2.28"
@@ -12634,6 +12629,11 @@ watchpack@^1.7.4:
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
+
+watermark-dom@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/watermark-dom/download/watermark-dom-2.3.0.tgz#9b79c0f0f5bc6fe150524c9f996ab1eb0ff5137f"
+  integrity sha1-m3nA8PW8b+FQUkyfmWqx6w/1E38=
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"

@@ -1,4 +1,6 @@
     @title: t-layout;
+    @headerIconFontSize: 19px;
+    @headerIconMarginRight: 15px;
 
     .@{title} {
         width : 100vw;
@@ -78,16 +80,25 @@
                 height          : 48px;
                 line-height     : 48px;
 
-                &-name {
-                    margin-right: 12px;
+                &-heart {
+                    margin-right: 6px;
                 }
 
-                &-screenfull{
-                    margin-right: 12px;
-                    font-size:17px;
+                &-name {
+                    font-size: 15px;
+                    cursor: default;
+                }
+
+                &-name, &-screenfull, &-gitHub {
+                    margin-right: @headerIconMarginRight;
+                }
+
+                &-screenfull, &-gitHub {
+                    font-size: @headerIconFontSize;
                     cursor: pointer;
                 }
-                &-screenfull:hover{
+
+                &-screenfull:hover, &-gitHub:hover{
                     color: var(--primary-color) !important;
                 }
 
@@ -194,7 +205,7 @@
         &-trigger-icon {
             cursor    : pointer;
             transition: color 0.3s;
-            font-size : 18px;
+            font-size : @headerIconFontSize;
 
             color: rgba(0, 0, 0, .85);
 
