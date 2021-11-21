@@ -106,6 +106,10 @@ const Login = props => {
                     {...layout}
                     className={styles["login-form"]}
                     onFinish={onFinish}
+                    initialValues={{
+                        username: 'ceshi',
+                        password: '123456'
+                    }}
                 >
                     <FormItem>
                         <div className={styles['login-form-logo']}>
