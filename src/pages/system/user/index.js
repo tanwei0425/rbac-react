@@ -167,7 +167,7 @@ const Index = () => {
                 title={() => '用户管理列表'}
                 onChange={onChange}
                 scroll={{ x: 1000 }}
-                toolBarRender={() => [
+                toolBarRender={[
                     <WrapperButton
                         type={'dashed'}
                         authButStatus='export-user'

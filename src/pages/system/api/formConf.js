@@ -121,13 +121,24 @@ const FormConf = (modalChange, menuTreeData = []) => {
     ];
     const columns = [
         {
+            title: '序号',
+            dataIndex: 'id',
+            fixed: 'left',
+            valueType: 'indexBorder',
+            width: 80,
+        },
+        {
             title: '接口名称',
             dataIndex: 'name',
             fixed: 'left',
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '路径',
             dataIndex: 'path',
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '方法',

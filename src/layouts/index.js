@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-03-13 12:44:10
  * @FilePath: /open-platform/src/layouts/index.tsx
  */
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { Outlet } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from "antd";
@@ -15,6 +15,7 @@ import {
   MenuFoldOutlined,
 } from '@ant-design/icons';
 import classnames from 'classnames';
+import watermark from 'watermark-dom';
 import { collapsedClick } from '@/stores/actions/commonAction';
 import { ColorChangeLogo } from '@/components/Logo';
 import MyHeader from '@/layouts/header';
@@ -29,6 +30,19 @@ const UseLayout = () => {
   const { collapsed, navigationMode } = useSelector((state) => state.common);
   const dispatch = useDispatch();
   const onCollapse = () => dispatch(collapsedClick(!collapsed));
+
+  useEffect(() => {
+    watermark.init({
+      watermark_txt: "测试水印测试水印",
+      monitor: false,
+      watermark_parent_node: 'watermark-id'
+    });
+    if (!navigationMode?.watermark) {
+      watermark.remove();
+    }
+    console.log(navigationMode?.watermark, 'navigationMode?.watermark');
+
+  }, [navigationMode?.watermark]);
 
   const FixedHeaderClass = classnames(
     styles['t-layout-info-header'],
@@ -86,7 +100,7 @@ const UseLayout = () => {
           <MyHeader />
         </Header>
         <Breadcrumb />
-        <Content className={styles['t-layout-info-content']}>
+        <Content id={'watermark-id'} className={styles['t-layout-info-content']}>
           <div className={ContentDivClass}>
             <Outlet />
           </div>

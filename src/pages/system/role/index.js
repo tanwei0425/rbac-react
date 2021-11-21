@@ -245,7 +245,7 @@ const Index = () => {
                 title={() => '角色管理列表'}
                 onChange={onChange}
                 scroll={{ x: 1000 }}
-                toolBarRender={() => [
+                toolBarRender={[
                     <WrapperButton
                         type={'primary'}
                         onClick={() => modalChange('create', '添加角色')}

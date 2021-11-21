@@ -102,7 +102,7 @@ const Index = () => {
                 loading={tableRequestRes.loading}
                 title={() => '菜单管理列表'}
                 scroll={{ x: 1300 }}
-                toolBarRender={() => [
+                toolBarRender={[
                     <WrapperButton
                         type={'primary'}
                         onClick={() => modalChange('create', '添加菜单')}
