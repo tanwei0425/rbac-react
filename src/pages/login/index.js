@@ -107,7 +107,7 @@ const Login = props => {
                     className={styles["login-form"]}
                     onFinish={onFinish}
                     initialValues={{
-                        username: 'ceshi',
+                        username: 'yanshi',
                         password: '123456'
                     }}
                 >
