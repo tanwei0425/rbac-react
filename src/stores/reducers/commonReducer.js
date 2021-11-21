@@ -16,7 +16,6 @@ export const navigationModeIni = {
     menuTrigger: false,
     breadcrumb: true,
     fixedHeader: true,
-    watermark: false,
     displaySystemConfig: true,
 };
 

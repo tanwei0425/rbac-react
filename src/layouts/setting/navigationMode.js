@@ -20,7 +20,6 @@ const NavigationMode = (props) => {
         { key: 'menuTrigger', title: '触发器固定顶部' },
         { key: 'breadcrumb', title: '简易面包屑' },
         { key: 'fixedHeader', title: '固定 Header' },
-        { key: 'watermark', title: '水印' },
     ];
 
     const onChange = (e, key) => setSkin(key, e, '导航模式更新成功');
