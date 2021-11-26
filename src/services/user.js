@@ -33,18 +33,18 @@ const deleteUser = ({ id, ...rest }) => ({
     data: rest,
 });
 const reloadPwd = ({ id, ...rest }) => ({
-    url: `${servicesPath}/v1/user/reloadPwd/${id}`,
+    url: `${servicesPath}/v1/reloadPwdUser/${id}`,
     method: 'get',
     data: rest,
 });
 
 const getAllUser = () => ({
-    url: `${servicesPath}/v1/user/all`,
+    url: `${servicesPath}/v1/allUser`,
     method: 'get',
 });
 
 const exportUser = (data) => ({
-    url: `${servicesPath}/v1/user/export`,
+    url: `${servicesPath}/v1/exportUser`,
     method: 'get',
     data,
 });

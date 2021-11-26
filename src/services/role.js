@@ -57,7 +57,7 @@ const setRoleAuth = ({ id, ...rest }) => ({
 });
 
 const allRole = (data) => ({
-    url: `${servicesPath}/v1/role/all`,
+    url: `${servicesPath}/v1/allRole`,
     method: 'get',
     data,
 });
