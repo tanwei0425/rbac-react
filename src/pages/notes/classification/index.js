@@ -3,16 +3,14 @@ import { useRequest } from 'ahooks';
 import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
-import request from '@/services/menu';
-import { arrayToTree, formatTreeSelect } from '@/utils/utils';
+import request from '@/services/api';
 import Operate from './operate';
 import FormConf from './formConf';
 
 const Index = () => {
     const [form] = useForm();
-    const [isRouterVal, setIsRouterVal] = useState();
     const [dataSource, setDataSource] = useState([]);
-    const [treeData, setTreeData] = useState([]);
+    const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
     const [tableRecord, setTableRecord] = useState({});
     const [modalType, setModalType] = useState('');
     const iniModalConifg = {
@@ -21,17 +19,16 @@ const Index = () => {
         width: 640,
     };
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
-    const detailsRequestRes = useRequest(request.getMenuDetail, { manual: true });
-    const tableRequestRes = useRequest(request.getMenuTable, { manual: true });
-    const createRequestRes = useRequest(request.createMenu, { manual: true });
-    const updateRequestRes = useRequest(request.updateMenu, { manual: true });
-    const deleteRequestRes = useRequest(request.deleteMenu, { manual: true });
+    const detailsRequestRes = useRequest(request.getApiDetail, { manual: true });
+    const tableRequestRes = useRequest(request.getApiTable, { manual: true });
+    const createRequestRes = useRequest(request.createApi, { manual: true });
+    const updateRequestRes = useRequest(request.updateApi, { manual: true });
+    const deleteRequestRes = useRequest(request.deleteApi, { manual: true });
 
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
         if (res?.code === 200) {
             form.setFieldsValue({ ...res?.data });
-            setIsRouterVal(res?.data?.isRouter);
         }
     };
 
@@ -39,7 +36,7 @@ const Index = () => {
         setModalType(type);
         if (type === 'update' || type === 'delete') {
             getDetail(record.id);
-            setTableRecord({ ...record });
+            setTableRecord(record);
         }
         setModalConfig({ ...modalConfig, title, visible: true });
     };
@@ -48,7 +45,6 @@ const Index = () => {
         if (modalType === 'create' || modalType === 'update') {
             form.validateFields()
                 .then(async (values) => {
-                    values.cmpPath = values?.cmpPath || '';
                     const request = modalType === 'update' ? updateRequestRes : createRequestRes;
                     modalType === 'update' && (values.id = tableRecord.id);
                     const res = await request.run(values);
@@ -72,56 +68,58 @@ const Index = () => {
         setModalConfig(iniModalConifg);
         setModalType('');
         setTableRecord('');
-        setIsRouterVal('0');
         form?.resetFields();
     };
     const getTableData = async () => {
-        const res = await tableRequestRes.run();
+        const data = {
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+        };
+        const res = await tableRequestRes.run(data);
+        console.log(res, 'res');
         if (res?.code === 200) {
-            const dataSource = arrayToTree(res?.data || []);
-            const treeData = formatTreeSelect(dataSource, { title: 'name', value: 'id' });
-            const topTreeData = [{ value: 0, title: '顶级', children: treeData }];
-            setDataSource(dataSource);
-            setTreeData(topTreeData);
+            setDataSource(res?.data?.list || []);
+            setPagination({ ...pagination, total: res?.data?.total });
         }
     };
-    const formSchemaChange = (e) => {
-        setIsRouterVal(e.target.value);
+    const onChange = (paginationConfig) => {
+        setPagination({
+            current: paginationConfig?.current,
+            pageSize: paginationConfig?.pageSize,
+        });
     };
     useEffect(() => {
         getTableData();
-    }, []);
+    }, [
+        pagination?.current,
+        pagination?.pageSize,
+    ]);
 
-    console.log(isRouterVal, 'isRouterVal');
-    const { columns, formSchema } = FormConf({ modalChange, formSchemaChange });
+    const { formSchema, columns } = FormConf(modalChange);
     return (
         <>
-            {dataSource.length > 0 && <WrapperTable
+            <WrapperTable
                 dataSource={dataSource}
                 columns={columns}
                 rowKey={'id'}
                 loading={tableRequestRes.loading}
-                title={() => '菜单管理列表'}
-                scroll={{ x: 1300 }}
+                title={() => '分类管理列表'}
+                onChange={onChange}
+                scroll={{ x: 800 }}
                 toolBarRender={[
                     <WrapperButton
                         type={'primary'}
-                        onClick={() => modalChange('create', '添加菜单')}
-                        authButStatus='add-menu'
+                        onClick={() => modalChange('create', '添加分类')}
+                        authButStatus='add-api'
                     >
-                        添加菜单
+                        添加分类
                     </WrapperButton>,
                 ]}
-                expandable={{
-                    defaultExpandAllRows: true
-                }}
-                pagination={false}
-            />}
+                pagination={pagination}
+            />
             <Operate
-                isRouterVal={isRouterVal}
-                formSchema={formSchema}
-                treeData={treeData}
                 modalType={modalType}
+                formSchema={formSchema}
                 tableRecord={tableRecord}
                 formConfig={{
                     form,

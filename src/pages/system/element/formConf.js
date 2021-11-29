@@ -118,6 +118,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         },
         {
             title: '状态',
+            width: 80,
             dataIndex: 'status',
             render(text) {
                 const name = tableColumnToDict(dictAllData?.status, text);
@@ -126,6 +127,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         },
         {
             title: '创建时间',
+            width: 180,
             dataIndex: 'createdAt',
             render: (text) => dateTimeFormat(text)
         },

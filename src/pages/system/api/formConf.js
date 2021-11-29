@@ -142,6 +142,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         },
         {
             title: '方法',
+            width: 80,
             dataIndex: 'method',
         },
         {
@@ -154,6 +155,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         {
             title: '状态',
             dataIndex: 'status',
+            width: 80,
             render(text) {
                 const name = tableColumnToDict(dictAllData?.status, text);
                 return <Tag color={text === '1' ? '#87d068' : '#ff4d4f'}>{name}</Tag>;
@@ -162,6 +164,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         {
             title: '创建时间',
             dataIndex: 'createdAt',
+            width: 180,
             render: (text) => dateTimeFormat(text)
         },
         {

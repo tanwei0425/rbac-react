@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-03-13 12:44:10
  * @FilePath: /open-platform/src/layouts/index.tsx
  */
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import { Outlet } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout } from "antd";

@@ -13,6 +13,7 @@ import Select from '@/components/FormElements/Select';
 import Radio from '@/components/FormElements/Radio';
 import TreeSelect from '@/components/FormElements/TreeSelect';
 import Transfer from '@/components/FormElements/Transfer';
+import Color from '@/components/FormElements/Color';
 
 const FormRenderComponent = ({ componentType, ...fieldProps }) => {
     switch (componentType) {
@@ -36,6 +37,9 @@ const FormRenderComponent = ({ componentType, ...fieldProps }) => {
             return <Transfer {...fieldProps} />;
         case 'radio':
             return <Radio {...fieldProps} />;
+        case 'color':
+            return <Color {...fieldProps} />;
+
         case 'dom':
             return fieldProps;
         default: return <span className="componentError">组件类型错误</span>;

@@ -39,7 +39,7 @@ const Setting = (props) => {
                 width={300}
                 destroyOnClose={true}
                 closable={false}
-                zIndex={997}
+                zIndex={1997}
                 onClose={onClose}
                 visible={visible}
             >
