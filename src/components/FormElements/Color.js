@@ -3,6 +3,7 @@ import { SketchPicker } from 'react-color';
 import { Button } from 'antd';
 import { CloseSquareOutlined } from '@ant-design/icons';
 const Color = ({ children, onChange, ...restFiledProps }) => {
+    // restFiledProps 为 react-color 组件原声api
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
     const [color, setColor] = useState();
     const styles = {

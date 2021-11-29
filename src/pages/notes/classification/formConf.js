@@ -28,7 +28,6 @@ const FormConf = (modalChange) => {
             ],
             fieldProps: {
                 componentType: "color",
-                placeholder: "请输入颜色标识",
             },
         },
 
