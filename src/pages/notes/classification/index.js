@@ -3,7 +3,8 @@ import { useRequest } from 'ahooks';
 import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
-import request from '@/services/api';
+import SearchForm from '@/components/SearchForm';
+import request from '@/services/notes/classification';
 import Operate from './operate';
 import FormConf from './formConf';
 
@@ -11,6 +12,9 @@ const Index = () => {
     const [form] = useForm();
     const [dataSource, setDataSource] = useState([]);
     const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
+    const [searchFormData, setSearchFormData] = useState({
+        status: '1'
+    });
     const [tableRecord, setTableRecord] = useState({});
     const [modalType, setModalType] = useState('');
     const iniModalConifg = {
@@ -19,15 +23,16 @@ const Index = () => {
         width: 640,
     };
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
-    const detailsRequestRes = useRequest(request.getApiDetail, { manual: true });
-    const tableRequestRes = useRequest(request.getApiTable, { manual: true });
-    const createRequestRes = useRequest(request.createApi, { manual: true });
-    const updateRequestRes = useRequest(request.updateApi, { manual: true });
-    const deleteRequestRes = useRequest(request.deleteApi, { manual: true });
+    const detailsRequestRes = useRequest(request.getNotesClassificationDetail, { manual: true });
+    const tableRequestRes = useRequest(request.getNotesClassificationTable, { manual: true });
+    const createRequestRes = useRequest(request.createNotesClassification, { manual: true });
+    const updateRequestRes = useRequest(request.updateNotesClassification, { manual: true });
+    const deleteRequestRes = useRequest(request.deleteNotesClassification, { manual: true });
 
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
         if (res?.code === 200) {
+            console.log(res?.data, 'res?.data');
             form.setFieldsValue({ ...res?.data });
         }
     };
@@ -74,9 +79,9 @@ const Index = () => {
         const data = {
             current: pagination.current,
             pageSize: pagination.pageSize,
+            ...searchFormData
         };
         const res = await tableRequestRes.run(data);
-        console.log(res, 'res');
         if (res?.code === 200) {
             setDataSource(res?.data?.list || []);
             setPagination({ ...pagination, total: res?.data?.total });
@@ -93,11 +98,30 @@ const Index = () => {
     }, [
         pagination?.current,
         pagination?.pageSize,
+        searchFormData
     ]);
 
-    const { formSchema, columns } = FormConf(modalChange);
+    const reset = () => {
+        setPagination({ current: 1, pageSize: 10, total: 0 });
+        setSearchFormData({ status: '1' });
+    };
+    const onFinish = async (values) => {
+        console.log(values, 'values');
+        setPagination({ current: 1, pageSize: 10, total: 0 });
+        setSearchFormData({ ...values });
+    };
+    const { formSchema, searchFormSchema, columns } = FormConf(modalChange);
     return (
         <>
+            <SearchForm
+                loading={tableRequestRes.loading}
+                reset={reset}
+                formSchema={searchFormSchema}
+                formConfig={{
+                    name: 'apiSearchForm',
+                    onFinish: onFinish
+                }}
+            />
             <WrapperTable
                 dataSource={dataSource}
                 columns={columns}

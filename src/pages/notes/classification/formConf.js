@@ -54,6 +54,28 @@ const FormConf = (modalChange) => {
             },
         },
     ];
+    const searchFormSchema = [
+        {
+            className: "serachFormItem",
+            name: "name",
+            label: '分类名称',
+            fieldProps: {
+                componentType: "input",
+                placeholder: "请输入分类名称",
+            },
+        },
+        {
+            className: "serachFormItem",
+            name: "status",
+            label: '分类状态',
+            initialValue: '1',
+            fieldProps: {
+                componentType: "select",
+                options: dictAllData?.status,
+                placeholder: "请选择分类状态",
+            },
+        },
+    ];
     const columns = [
         {
             title: '序号',
@@ -123,6 +145,7 @@ const FormConf = (modalChange) => {
     ];
     return {
         formSchema,
+        searchFormSchema,
         columns,
     };
 

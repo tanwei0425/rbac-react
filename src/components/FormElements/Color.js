@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { SketchPicker } from 'react-color';
 import { Button } from 'antd';
 import { CloseSquareOutlined } from '@ant-design/icons';
-const Color = ({ children, onChange, ...restFiledProps }) => {
+const Color = ({ children, onChange, value, ...restFiledProps }) => {
     // restFiledProps 为 react-color 组件原声api
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
-    const [color, setColor] = useState();
     const styles = {
         color: {
             display: 'inline-block',
             width: '36px',
             height: '14px',
             borderRadius: '2px',
-            backgroundColor: color
+            backgroundColor: value
             // background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         },
         swatch: {
@@ -24,8 +23,8 @@ const Color = ({ children, onChange, ...restFiledProps }) => {
             cursor: 'pointer',
         },
         popover: {
-            position: 'absolute',
-            zIndex: '2',
+            position: 'fixed',
+            zIndex: '99',
         },
         cover: {
             position: 'fixed',
@@ -42,12 +41,11 @@ const Color = ({ children, onChange, ...restFiledProps }) => {
         setDisplayColorPicker(false);
     };
     const triggerChange = (value) => {
-        setColor(value);
         onChange?.(value);
     };
     return (
         <>
-            {color ?
+            {value ?
                 <div onClick={handleClick}>
                     <div style={styles.swatch}>
                         <div style={styles.color} />
@@ -65,7 +63,7 @@ const Color = ({ children, onChange, ...restFiledProps }) => {
                     />
                     <SketchPicker
                         {...restFiledProps}
-                        color={color}
+                        color={value}
                         onChange={(e) => triggerChange(e.hex)}
                     />
                 </div>

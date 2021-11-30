@@ -2,10 +2,9 @@ import React from 'react';
 import WrapperForm, { FormItem, FormRenderComponent } from '@/components/FormElements';
 import WrapperModal from '@/components/WrapperModal';
 
-const Index = ({ menuTreeData, formSchema, modalType, tableRecord, formConfig, modalConfig }) => {
+const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) => {
     return (
         <WrapperModal
-            bodyStyle={{ minHeight: 450 }}
             {...modalConfig}
         >
             {(modalType === 'create' || modalType === 'update') &&
@@ -15,9 +14,6 @@ const Index = ({ menuTreeData, formSchema, modalType, tableRecord, formConfig, m
                 >
                     {formSchema?.map(val => {
                         const { fieldProps, ...restFiled } = val;
-                        if (val.name === 'menuId') {
-                            fieldProps.treeData = menuTreeData;
-                        }
                         return <FormItem
                             key={val.name}
                             {...restFiled}
