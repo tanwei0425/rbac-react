@@ -234,7 +234,7 @@ const removeTreeEmptyChildren = (treeNodeObj, recursionBasis = 'children',) => {
  */
 const tableColumnToDict = (dictData, target) => {
   if (!dictData || !target || !Array.isArray(dictData)) return target;
-  const text = dictData?.find(val => val?.key === target)?.value;
+  const text = dictData?.find(val => val?.key + '' === target + '')?.value;
   return text;
 };
 

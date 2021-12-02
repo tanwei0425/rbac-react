@@ -33,7 +33,11 @@ const deleteNotesClassification = ({ id, ...rest }) => ({
     method: 'delete',
     data: rest,
 });
-
+const getAllNotesClassification = (data) => ({
+    url: `${servicesPath}/v1/allNotesClassification`,
+    method: 'get',
+    data: data,
+});
 
 export default {
     getNotesClassificationTable,
@@ -41,4 +45,5 @@ export default {
     getNotesClassificationDetail,
     updateNotesClassification,
     deleteNotesClassification,
+    getAllNotesClassification,
 };

@@ -9,7 +9,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
         >
             {(modalType === 'create' || modalType === 'update') &&
                 <WrapperForm
-                    name="notesClassificationForm"
+                    name="notesArticleForm"
                     {...formConfig}
                 >
                     {formSchema?.map(val => {

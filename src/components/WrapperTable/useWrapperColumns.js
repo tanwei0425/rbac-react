@@ -70,7 +70,7 @@ function UseWrapperColumns(columns, pagination) {
              * 文本省略增加鼠标移入显示全部文本功能
              */
             val?.ellipsis && (val.render = text => <Tooltip arrowPointAtCenter placement="left" title={text}>{text}</Tooltip>);
-        }), [pagination]);
+        }), [pagination, columns]);
     return columns;
 }
 export default UseWrapperColumns;

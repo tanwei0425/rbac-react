@@ -2,21 +2,18 @@ import React from 'react';
 import WrapperForm, { FormItem, FormRenderComponent } from '@/components/FormElements';
 import WrapperModal from '@/components/WrapperModal';
 
-const Index = ({ menuTreeData, formSchema, modalType, tableRecord, formConfig, modalConfig }) => {
+const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) => {
     return (
         <WrapperModal
             {...modalConfig}
         >
             {(modalType === 'create' || modalType === 'update') &&
                 <WrapperForm
-                    name="elementForm"
+                    name="apiForm"
                     {...formConfig}
                 >
                     {formSchema?.map(val => {
                         const { fieldProps, ...restFiled } = val;
-                        if (val.name === 'menuId') {
-                            fieldProps.treeData = menuTreeData;
-                        }
                         return <FormItem
                             key={val.name}
                             {...restFiled}

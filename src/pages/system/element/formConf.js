@@ -12,7 +12,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             label: '元素名称',
             rules: [
                 { required: true, whitespace: true, message: "元素名称不能为空" },
-                { min: 2, max: 18, message: "元素名称长度在2到18个字符" },
+                { min: 2, max: 15, message: "元素名称长度在2到15个字符" },
             ],
             fieldProps: {
                 componentType: "input",
@@ -25,7 +25,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             label: '元素编码',
             rules: [
                 { required: true, whitespace: true, message: "元素编码不能为空" },
-                { min: 2, max: 18, message: "元素编码名长度在2到18个字符" },
+                { min: 4, max: 35, message: "元素编码名长度在4到35个字符" },
             ],
             fieldProps: {
                 componentType: "input",
@@ -42,6 +42,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             fieldProps: {
                 componentType: "treeSelect",
                 placeholder: "请选择所属菜单",
+                treeData: menuTreeData,
             },
         },
         {

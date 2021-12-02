@@ -12,7 +12,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             label: '接口名称',
             rules: [
                 { required: true, whitespace: true, message: "接口名称不能为空" },
-                { min: 2, max: 18, message: "接口名称长度在2到18个字符" },
+                { min: 2, max: 15, message: "接口名称长度在2到15个字符" },
             ],
             fieldProps: {
                 componentType: "input",
@@ -51,6 +51,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             ],
             fieldProps: {
                 componentType: "treeSelect",
+                treeData: menuTreeData,
                 placeholder: "请选择所属菜单",
             },
         },

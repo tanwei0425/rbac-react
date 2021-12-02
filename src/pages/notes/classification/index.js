@@ -118,7 +118,7 @@ const Index = () => {
                 reset={reset}
                 formSchema={searchFormSchema}
                 formConfig={{
-                    name: 'apiSearchForm',
+                    name: 'notesClassificationSearchForm',
                     onFinish: onFinish
                 }}
             />
@@ -134,7 +134,7 @@ const Index = () => {
                     <WrapperButton
                         type={'primary'}
                         onClick={() => modalChange('create', '添加分类')}
-                        authButStatus='add-api'
+                        authButStatus='add-notes-classification'
                     >
                         添加分类
                     </WrapperButton>,

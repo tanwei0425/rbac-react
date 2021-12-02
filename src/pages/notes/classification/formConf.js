@@ -92,11 +92,13 @@ const FormConf = (modalChange) => {
         {
             title: '颜色标识',
             dataIndex: 'color',
-            ellipsis: true,
-            tip: '名称过长会自动收缩',
+            width: 120,
+            render(text) {
+                return <Tag color={text}>{text}</Tag>;
+            }
         },
         {
-            title: '状态',
+            title: '分类状态',
             dataIndex: 'status',
             width: 80,
             render(text) {
@@ -107,6 +109,8 @@ const FormConf = (modalChange) => {
         {
             title: '分类描述',
             dataIndex: 'description',
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '创建时间',
@@ -127,7 +131,7 @@ const FormConf = (modalChange) => {
                         onClick: (props) => modalChange('update', '编辑分类', props),
                         tip: '编辑分类',
                         type: "primary",
-                        authButStatus: 'edit-api',
+                        authButStatus: 'edit-notes-classification',
                     },
                     {
                         key: 'delete',
@@ -136,7 +140,7 @@ const FormConf = (modalChange) => {
                         tip: '删除分类',
                         type: "primary",
                         danger: true,
-                        authButStatus: 'delete-api',
+                        authButStatus: 'delete-notes-classification',
                     },
                 ];
                 return <TableActionsRender data={data} record={record} />;

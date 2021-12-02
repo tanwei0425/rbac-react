@@ -22,7 +22,6 @@ const Index = ({ formSchema, isRouterVal, treeData, modalType, tableRecord, form
                         fieldProps.treeData = treeData;
                     }
                     if (val.name === 'cmpPath') {
-                        console.log(isRouterVal, 'isRouterVal');
                         if (isRouterVal !== '1') {
                             return null;
                         }

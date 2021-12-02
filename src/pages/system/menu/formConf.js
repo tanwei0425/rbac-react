@@ -38,7 +38,7 @@ const FormConf = ({ modalChange, formSchemaChange }) => {
             label: '菜单编码',
             rules: [
                 { required: true, whitespace: true, message: "菜单编码不能为空" },
-                { min: 4, max: 25, message: "菜单编码名长度在4到25个字符" },
+                { min: 4, max: 35, message: "菜单编码名长度在4到35个字符" },
             ],
             fieldProps: {
                 componentType: "input",

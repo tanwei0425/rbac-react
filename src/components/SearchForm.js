@@ -26,7 +26,6 @@ const SearchForm = ({ formSchema = [], collapseNum = 2, moreActionDom, formConfi
     );
 
     const handleReset = () => {
-        console.log(form, 'form');
         form.resetFields();
         reset && reset();
     };

@@ -29,7 +29,7 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
     /**
     * table 表头和列公共方法处理
     */
-    const wrapperColumns = useCallback(() => UseWrapperColumns(columns, pagination), [pagination])();
+    const wrapperColumns = useCallback(() => UseWrapperColumns(columns, pagination), [columns, pagination])();
 
     const filterColnmnsData = wrapperColumns.filter(val => filterColnmnsKey.includes(val.dataIndex));
     return (

@@ -163,11 +163,11 @@ const Index = () => {
                 modalType={modalType}
                 formSchema={formSchema}
                 tableRecord={tableRecord}
-                menuTreeData={menuTreeData}
                 formConfig={{
                     form,
                 }}
                 modalConfig={{
+                    draggable: true,
                     onOk: hanleOnOk,
                     onCancel: hanleCancel,
                     confirmLoading: detailsRequestRes.loading || createRequestRes.loading || updateRequestRes.loading || deleteRequestRes.loading,
