@@ -221,7 +221,6 @@ const Index = () => {
     };
 
     const onFinish = async (values) => {
-        console.log(values, 'values');
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ ...values });
     };

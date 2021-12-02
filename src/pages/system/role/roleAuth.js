@@ -31,18 +31,34 @@ const Index = ({ allMenuElementApiData, roleAuthDetailData, roleAuthRef, loading
             setCheckableElements(clearCheckableRemoveElements);
             setCheckableApis(clearCheckableRemoveApis);
         }
-        // 渲染元素权限和接口权限
+        // 渲染元素权限和接口权限（key都是permissionId）
         eleShow(checkedKeys, 'elements', e.checked === false);
         eleShow(checkedKeys, 'apis', e.checked === false);
         // 控制元素和接口树展开
         setExpandedKeys([0, "public", ...checkedKeys]);
     };
+
+    // const treeRes = (data) => {
+    //     console.log(data, 'data');
+    // data.forEach(item => {
+    //     const a = treeRes(item);
+    // });
+    // };
     const eleShow = (targetMenus = [], type, menuClickStatus) => {
         const menuIdArr = [];
+        // 因为key不能用各自元素、接口、菜单的id（不是同一张表，id会重复，所以用的是permissionId为key）
+        // 根据permissionId找到menuId
+        console.log(allMenuElementApiData['menus'], 'allMenuElementApiData[]');
+        // const newTargetMenus = targetMenus.map(val => {
+        //     treeRes(allMenuElementApiData['menus']);
+        // });
+
+        // 
         const targetElements = allMenuElementApiData[type]?.filter(val => {
             if (targetMenus.includes(val?.menuId) && val?.menuId !== 0 && !menuIdArr.includes(val?.menuId)) menuIdArr.push(val?.menuId);
             return targetMenus.includes(val?.menuId);
         });
+
         const targetMenuElements = findElementsFatherMenu(targetElements, menuIdArr);
         const publicType = type === 'elements' ? allMenuElementApiData?.publicElements : allMenuElementApiData?.publicApis;
         const publicData = [];
