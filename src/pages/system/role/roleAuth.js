@@ -3,7 +3,7 @@ import WrapperTree from '@/components/WrapperTree';
 import { Row, Col, Spin } from 'antd';
 import { treeFind } from '@/utils/utils';
 import styles from './index.module.less';
-const Index = ({ allMenuElementApiData, roleAuthDetailData, roleAuthRef, loading }) => {
+const Index = ({ allMenuElementApiData, roleAuthDetailData, menusList, roleAuthRef, loading }) => {
     const [checkableMenus, setCheckableMenus] = useState([]);
     const [halfCheckedKeysMenus, setHalfCheckedKeysMenus] = useState([]);
     const [checkableApis, setCheckableApis] = useState([]);
@@ -38,27 +38,22 @@ const Index = ({ allMenuElementApiData, roleAuthDetailData, roleAuthRef, loading
         setExpandedKeys([0, "public", ...checkedKeys]);
     };
 
-    // const treeRes = (data) => {
-    //     console.log(data, 'data');
-    // data.forEach(item => {
-    //     const a = treeRes(item);
-    // });
-    // };
     const eleShow = (targetMenus = [], type, menuClickStatus) => {
         const menuIdArr = [];
         // 因为key不能用各自元素、接口、菜单的id（不是同一张表，id会重复，所以用的是permissionId为key）
         // 根据permissionId找到menuId
-        console.log(allMenuElementApiData['menus'], 'allMenuElementApiData[]');
-        // const newTargetMenus = targetMenus.map(val => {
-        //     treeRes(allMenuElementApiData['menus']);
-        // });
-
-        // 
-        const targetElements = allMenuElementApiData[type]?.filter(val => {
-            if (targetMenus.includes(val?.menuId) && val?.menuId !== 0 && !menuIdArr.includes(val?.menuId)) menuIdArr.push(val?.menuId);
-            return targetMenus.includes(val?.menuId);
+        const targetMenusId = [];
+        targetMenus.forEach(val => {
+            menusList.forEach(item => {
+                if (val === item.permissionId) {
+                    targetMenusId.push(item.id);
+                }
+            });
         });
-
+        const targetElements = allMenuElementApiData[type]?.filter(val => {
+            if (targetMenusId.includes(val?.menuId) && val?.menuId !== 0 && !menuIdArr.includes(val?.menuId)) menuIdArr.push(val?.menuId);
+            return targetMenusId.includes(val?.menuId);
+        });
         const targetMenuElements = findElementsFatherMenu(targetElements, menuIdArr);
         const publicType = type === 'elements' ? allMenuElementApiData?.publicElements : allMenuElementApiData?.publicApis;
         const publicData = [];
@@ -97,11 +92,11 @@ const Index = ({ allMenuElementApiData, roleAuthDetailData, roleAuthRef, loading
 
     const findElementsFatherMenu = (targetElements, menuIdArr) => {
         const targetMenuElements = menuIdArr.map(val => {
-            const targetMenu = treeFind(allMenuElementApiData?.menus, (item) => item.key === val);
+            const targetMenu = treeFind(allMenuElementApiData?.menus, (item) => item.id === val);
             return targetMenu && {
                 key: targetMenu.key,
                 title: targetMenu.title,
-                children: targetElements?.filter(item => targetMenu.key === item.menuId)
+                children: targetElements?.filter(item => targetMenu.id === item.menuId)
             };
         })?.filter(val => val);
         return targetMenuElements;

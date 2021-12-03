@@ -17,6 +17,7 @@ const Index = () => {
     const [form] = useForm();
     const roleAuthRef = useRef();
     const [dataSource, setDataSource] = useState([]);
+    const [menusList, setMenusList] = useState([]);
     const [allMenuElementApiData, setAllMenuElementApiData] = useState({});
     const [roleAuthDetailData, setRoleAuthDetailData] = useState({});
     const [userListData, setUserListData] = useState([]);
@@ -180,6 +181,7 @@ const Index = () => {
         const res = await allMenuElementApiRequest.run();
         const { code, data } = res;
         if (code === 200) {
+            setMenusList(data?.menus || []);
             // 添加全部顶级
             const menusTree = arrayToTree(data?.menus || []);
             const formatMenusTree = formatTreeSelect(menusTree, { title: 'name', value: 'permissionId' }, 'children', 'title', 'key', true);
@@ -286,6 +288,7 @@ const Index = () => {
                         roleAuthRef={roleAuthRef}
                         allMenuElementApiData={allMenuElementApiData}
                         roleAuthDetailData={roleAuthDetailData}
+                        menusList={menusList}
                     />
                 }
             </WrapperModal>
