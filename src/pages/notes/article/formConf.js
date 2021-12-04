@@ -65,7 +65,7 @@ const FormConf = (modalChange, allNotesClassData = []) => {
                 { required: true, whitespace: true, message: "文章内容不能为空" },
             ],
             fieldProps: {
-                componentType: "textArea",
+                componentType: "braftEditor",
                 placeholder: "请输入文章内容",
                 maxLength: 30,
             },

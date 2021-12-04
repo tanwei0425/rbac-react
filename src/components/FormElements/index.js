@@ -14,6 +14,7 @@ import Radio from '@/components/FormElements/Radio';
 import TreeSelect from '@/components/FormElements/TreeSelect';
 import Transfer from '@/components/FormElements/Transfer';
 import Color from '@/components/FormElements/Color';
+import BraftEditor from '@/components/FormElements/BraftEditor';
 
 const FormRenderComponent = ({ componentType, ...fieldProps }) => {
     switch (componentType) {
@@ -39,6 +40,8 @@ const FormRenderComponent = ({ componentType, ...fieldProps }) => {
             return <Radio {...fieldProps} />;
         case 'color':
             return <Color {...fieldProps} />;
+        case 'braftEditor':
+            return <BraftEditor {...fieldProps} />;
 
         case 'dom':
             return fieldProps;
