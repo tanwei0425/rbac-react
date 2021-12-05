@@ -62,12 +62,20 @@ const FormConf = (modalChange, allNotesClassData = []) => {
             name: "content",
             label: '文章内容',
             rules: [
-                { required: true, whitespace: true, message: "文章内容不能为空" },
+                {
+                    required: true,
+                    validator: (_, value, callback) => {
+                        if (!value || value.isEmpty()) {
+                            callback('文章内容不能为空');
+                        } else {
+                            callback();
+                        }
+                    }
+                }
             ],
             fieldProps: {
                 componentType: "braftEditor",
                 placeholder: "请输入文章内容",
-                maxLength: 30,
             },
         },
     ];

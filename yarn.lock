@@ -3261,7 +3261,7 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-braft-convert@^2.3.0:
+braft-convert@^2.1.10, braft-convert@^2.3.0:
   version "2.3.0"
   resolved "https://registry.nlark.com/braft-convert/download/braft-convert-2.3.0.tgz#27d5905136c334903d083b7a2352a72045627888"
   integrity sha1-J9WQUTbDNJA9CDt6I1KnIEVieIg=
@@ -3284,12 +3284,21 @@ braft-editor@^2.3.9:
     draftjs-utils "^0.9.4"
     immutable "~3.7.4"
 
+braft-extensions@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.nlark.com/braft-extensions/download/braft-extensions-0.1.1.tgz#7fd5f5ec1f708deae840b9cd39ddfac263efa69c"
+  integrity sha1-f9X17B9wjeroQLnNOd36wmPvppw=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    braft-convert "^2.1.10"
+    braft-utils "^3.0.12"
+
 braft-finder@^0.0.19:
   version "0.0.19"
   resolved "https://registry.nlark.com/braft-finder/download/braft-finder-0.0.19.tgz#c324d82526ed3476a93de86cc9b407f4e188bc8d"
   integrity sha1-wyTYJSbtNHapPehsybQH9OGIvI0=
 
-braft-utils@^3.0.8:
+braft-utils@^3.0.12, braft-utils@^3.0.8:
   version "3.0.12"
   resolved "https://registry.nlark.com/braft-utils/download/braft-utils-3.0.12.tgz#2b755ce1d8397d96b627b6767f74d07f25729d85"
   integrity sha1-K3Vc4dg5fZa2J7Z2f3TQfyVynYU=
@@ -4866,6 +4875,14 @@ draft-js-multidecorators@^1.0.0:
   dependencies:
     immutable "*"
 
+draft-js-prism@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.npm.taobao.org/draft-js-prism/download/draft-js-prism-1.0.6.tgz#880c5e5ae1a161646cdacc7296a01bf48b0030b4"
+  integrity sha1-iAxeWuGhYWRs2sxylqAb9IsAMLQ=
+  dependencies:
+    extend "^3.0.0"
+    immutable "*"
+
 draft-js@^0.10.3:
   version "0.10.5"
   resolved "https://registry.nlark.com/draft-js/download/draft-js-0.10.5.tgz#bfa9beb018fe0533dbb08d6675c371a6b08fa742"
@@ -5573,7 +5590,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@~3.0.2:
+extend@^3.0.0, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -9945,6 +9962,11 @@ printj@~1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/printj/-/printj-1.1.2.tgz#d90deb2975a8b9f600fb3a1c94e3f4c53c78a222"
   integrity sha512-zA2SmoLaxZyArQTOPj5LXecR+RagfPSU5Kw1qP+jkWeNlrq+eJZyY2oS68SU1Z/7/myXM4lo9716laOFAVStCQ==
+
+prismjs@^1.25.0:
+  version "1.25.0"
+  resolved "https://registry.nlark.com/prismjs/download/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
+  integrity sha1-b4It8b2tllc0sxCzFaIzFc+Zl1Y=
 
 process-nextick-args@~2.0.0:
   version "2.0.1"

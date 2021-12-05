@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
+import BraftEditor from 'braft-editor';
 import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
@@ -22,7 +23,7 @@ const Index = () => {
     const iniModalConifg = {
         title: '操作',
         visible: false,
-        width: 640,
+        width: 900,
     };
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
     const detailsRequestRes = useRequest(request.getNotesArticleDetail, { manual: true });
@@ -35,8 +36,9 @@ const Index = () => {
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
         if (res?.code === 200) {
-            console.log(res?.data, 'res?.data');
-            form.setFieldsValue({ ...res?.data });
+            const { content, ...value } = res?.data;
+            const contentVal = BraftEditor.createEditorState(content);
+            form.setFieldsValue({ content: contentVal, ...value });
         }
     };
 
@@ -55,6 +57,7 @@ const Index = () => {
                 .then(async (values) => {
                     const request = modalType === 'update' ? updateRequestRes : createRequestRes;
                     modalType === 'update' && (values.id = tableRecord.id);
+                    values?.content && (values.content = values.content.toHTML());
                     const res = await request.run(values);
                     if (res?.code === 200) {
                         window.message.success('操作成功');
