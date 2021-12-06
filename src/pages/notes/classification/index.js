@@ -40,7 +40,7 @@ const Index = () => {
     const modalChange = async (type, title, record) => {
         setModalType(type);
         if (type === 'update' || type === 'delete') {
-            getDetail(record.id);
+            type === 'update' && getDetail(record.id);
             setTableRecord(record);
         }
         setModalConfig({ ...modalConfig, title, visible: true });
