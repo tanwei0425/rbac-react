@@ -45,10 +45,10 @@ const Index = () => {
     const modalChange = async (type, title, record) => {
         setModalType(type);
         if (type === 'update' || type === 'delete') {
-            getDetail(record.id);
+            type === 'update' && getDetail(record.id);
             setTableRecord(record);
         }
-        setModalConfig({ ...modalConfig, title, visible: true });
+        setModalConfig({ ...modalConfig, width: type === 'delete' ? 640 : 900, title, visible: true });
     };
 
     const hanleOnOk = async () => {
@@ -76,7 +76,7 @@ const Index = () => {
     };
 
     const hanleCancel = () => {
-        setModalConfig(iniModalConifg);
+        setModalConfig({ ...iniModalConifg, width: modalConfig.width });
         setModalType('');
         setTableRecord('');
         form?.resetFields();

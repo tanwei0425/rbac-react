@@ -57,8 +57,9 @@ const Index = () => {
         setModalType(type);
         setTableRecord(record);
         const putModalConfig = { ...modalConfig };
-        if (type === 'update' || type === 'delete') {
-            getDetail(record.id);
+        if (type === 'update' || type === 'delete' || type === 'create') {
+            (type === 'update' || type === 'delete') && getDetail(record.id);
+            putModalConfig.width = 640;
         }
         if (type === 'associateUser') {
             putModalConfig.width = 720;
