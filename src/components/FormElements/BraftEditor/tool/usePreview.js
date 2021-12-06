@@ -2,11 +2,14 @@
 // 预览填充页面
 const usePreview = (value) => {
   const buildPreviewHtml = () => {
+
+    // https://prismjs.com/download.html 如果需要添加其余语言，请下载后放在https://resource.hellotanwei.cn/static/目录下
     return `
         <!Doctype html>
         <html>
           <head>
-            <title>Preview Content</title>
+            <title>预览富文本</title>
+            <link rel="stylesheet" href="https://resource.hellotanwei.cn/static/css/prism.css" />
             <style>
               html,body{
                 height: 100%;
@@ -26,6 +29,7 @@ const usePreview = (value) => {
                 background-color: #fff;
                 border-right: solid 1px #eee;
                 border-left: solid 1px #eee;
+                white-space: pre-wrap;
               }
               .container img,
               .container audio,
@@ -52,11 +56,11 @@ const usePreview = (value) => {
           </head>
           <body>
             <div class="container">${value?.toHTML() || ''}</div>
+            <script src="https://resource.hellotanwei.cn/static/js/prism.js"></script>
           </body>
         </html>
       `;
   };
-
   const preview = () => {
     window.previewWindow && window.previewWindow.close();
     window.previewWindow = window.open();

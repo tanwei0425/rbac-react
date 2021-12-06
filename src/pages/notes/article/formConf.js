@@ -61,6 +61,7 @@ const FormConf = (modalChange, allNotesClassData = []) => {
             className: "formItem",
             name: "content",
             label: '文章内容',
+            validateTrigger: 'onBlur',
             rules: [
                 {
                     required: true,

@@ -2,6 +2,11 @@ import React from 'react';
 import WrapperForm, { FormItem, FormRenderComponent } from '@/components/FormElements';
 import WrapperModal from '@/components/WrapperModal';
 
+const formItemLayout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 18 },
+};
+
 const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) => {
     return (
         <WrapperModal
@@ -11,6 +16,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                 <WrapperForm
                     name="notesArticleForm"
                     {...formConfig}
+                    {...formItemLayout}
                 >
                     {formSchema?.map(val => {
                         const { fieldProps, ...restFiled } = val;

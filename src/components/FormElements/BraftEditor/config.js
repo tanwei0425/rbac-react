@@ -5,8 +5,9 @@ const controls = ['undo', 'redo', 'separator',
     'superscript', 'subscript', 'remove-styles', 'separator',
     'text-indent', 'text-align', 'separator',
     'headings', 'list-ul', 'list-ol', 'blockquote', 'code', 'separator',
-    'link', 'separator', 'hr', 'separator',
-    'separator', 'clear', 'fullscreen', 'emoji'];
+    'link', 'separator',
+    'hr', 'emoji', 'separator',
+    'clear', 'fullscreen',];
 
 const fontFamilies = [
     {
