@@ -98,15 +98,8 @@ const useTableSetting = ({ columns = [], setFilterColnmnsKey, filterColnmnsKey }
     const reset = () => {
         setFilterColnmnsKey(columns.map(val => val.key));
     };
-    const onCheck = (checkedKeys, e) => {
-        console.log(checkedKeys, 'checkedKeys');
-        console.log(e, 'eeeee111');
-        if (e.node.key === 'all' && e.checked) {
-            setFilterColnmnsKey(columns.map(val => val.key));
-        } else {
-            setFilterColnmnsKey(checkedKeys);
-        }
-
+    const onCheck = (checkedKeys) => {
+        setFilterColnmnsKey(checkedKeys);
     };
     const menu = <div className={menuClass} >
         <Row className={styles['wrapper-title-tool-tableSetting-title']} justify="space-between" align="middle">
