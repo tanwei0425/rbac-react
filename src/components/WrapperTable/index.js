@@ -11,8 +11,9 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
      */
     const tableSettingColumns = columns?.map(val => {
         return {
-            label: val.title,
-            value: val.dataIndex,
+            title: val.title,
+            key: val.dataIndex,
+            disabled: val.required || val.fixed, // 固定的和required 不可以取消选择和拖动
         };
     });
     /**
@@ -25,13 +26,21 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
         () => UseWrapperTitle({ title, toolBarRender, size, tableSettingColumns })
         , [title, toolBarRender, size]
     )();
-
     /**
     * table 表头和列公共方法处理
     */
     const wrapperColumns = useCallback(() => UseWrapperColumns(columns, pagination), [columns, pagination])();
 
-    const filterColnmnsData = wrapperColumns.filter(val => filterColnmnsKey.includes(val.dataIndex));
+    // 获取过滤和排序后的columns
+    const filterColnmnsData = [];
+    filterColnmnsKey.forEach(val => {
+        wrapperColumns.forEach(item => {
+            if (item.dataIndex === val) {
+                filterColnmnsData.push(item);
+            }
+        });
+    });
+
     return (
         <div className={'t-table'}>
             <Table

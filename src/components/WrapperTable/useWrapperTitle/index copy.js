@@ -14,7 +14,7 @@ import sytles from './index.module.less';
 
 const useWrapperTitle = ({ title, toolBarRender, size, tableSettingColumns }) => {
     const [wrapperSize, setWrapperSize] = useState(size);
-    const [filterColnmnsKey, setFilterColnmnsKey] = useState(tableSettingColumns.map(val => val.key));
+    const [filterColnmnsKey, setFilterColnmnsKey] = useState(tableSettingColumns.map(val => val.value));
 
     const wrapperTitle = useMemo(() => {
         let newToolBarRender = [

@@ -30,8 +30,40 @@ legend {color: inherit;}
 mark {background-color: #feffe6;}
 ::selection {color: #fff;background: @primary-color;}
 .anticon {color: inherit;}
+.ant-fade-enter, .ant-fade-appear {animation-fill-mode: both;}
+.ant-fade-leave {animation-fill-mode: both;}
+.ant-move-up-enter, .ant-move-up-appear {animation-fill-mode: both;}
+.ant-move-up-leave {animation-fill-mode: both;}
+.ant-move-down-enter, .ant-move-down-appear {animation-fill-mode: both;}
+.ant-move-down-leave {animation-fill-mode: both;}
+.ant-move-left-enter, .ant-move-left-appear {animation-fill-mode: both;}
+.ant-move-left-leave {animation-fill-mode: both;}
+.ant-move-right-enter, .ant-move-right-appear {animation-fill-mode: both;}
+.ant-move-right-leave {animation-fill-mode: both;}
 html {--antd-wave-shadow-color: @primary-color;}
-[ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {border-radius: inherit;box-shadow: 0 0 0 0 @primary-color;box-shadow: 0 0 0 0 var(--antd-wave-shadow-color);}
+[ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {border-radius: inherit;box-shadow: 0 0 0 0 @primary-color;box-shadow: 0 0 0 0 var(--antd-wave-shadow-color);animation-fill-mode: forwards;}
+.ant-slide-up-enter, .ant-slide-up-appear {animation-fill-mode: both;}
+.ant-slide-up-leave {animation-fill-mode: both;}
+.ant-slide-down-enter, .ant-slide-down-appear {animation-fill-mode: both;}
+.ant-slide-down-leave {animation-fill-mode: both;}
+.ant-slide-left-enter, .ant-slide-left-appear {animation-fill-mode: both;}
+.ant-slide-left-leave {animation-fill-mode: both;}
+.ant-slide-right-enter, .ant-slide-right-appear {animation-fill-mode: both;}
+.ant-slide-right-leave {animation-fill-mode: both;}
+.ant-zoom-enter, .ant-zoom-appear {animation-fill-mode: both;}
+.ant-zoom-leave {animation-fill-mode: both;}
+.ant-zoom-big-enter, .ant-zoom-big-appear {animation-fill-mode: both;}
+.ant-zoom-big-leave {animation-fill-mode: both;}
+.ant-zoom-big-fast-enter, .ant-zoom-big-fast-appear {animation-fill-mode: both;}
+.ant-zoom-big-fast-leave {animation-fill-mode: both;}
+.ant-zoom-up-enter, .ant-zoom-up-appear {animation-fill-mode: both;}
+.ant-zoom-up-leave {animation-fill-mode: both;}
+.ant-zoom-down-enter, .ant-zoom-down-appear {animation-fill-mode: both;}
+.ant-zoom-down-leave {animation-fill-mode: both;}
+.ant-zoom-left-enter, .ant-zoom-left-appear {animation-fill-mode: both;}
+.ant-zoom-left-leave {animation-fill-mode: both;}
+.ant-zoom-right-enter, .ant-zoom-right-appear {animation-fill-mode: both;}
+.ant-zoom-right-leave {animation-fill-mode: both;}
 .ant-alert {color: rgba(0, 0, 0, 0.85);border-radius: 2px;}
 .ant-alert-success {background-color: #f6ffed;border: 1px solid #b7eb8f;}
 .ant-alert-success .ant-alert-icon {color: #52c41a;}
@@ -91,6 +123,8 @@ html {--antd-wave-shadow-color: @primary-color;}
 .ant-badge-status-geekblue {background: #2f54eb;}
 .ant-badge-status-purple {background: #722ed1;}
 .ant-badge-status-text {color: rgba(0, 0, 0, 0.85);}
+.ant-badge-zoom-appear, .ant-badge-zoom-enter {animation-fill-mode: both;}
+.ant-badge-zoom-leave {animation-fill-mode: both;}
 .ant-ribbon {color: rgba(0, 0, 0, 0.85);color: #fff;background-color: @primary-color;border-radius: 2px;}
 .ant-ribbon-text {color: #fff;}
 .ant-ribbon-corner {color: currentColor;border: 4px solid;}
@@ -446,7 +480,7 @@ html {--antd-wave-shadow-color: @primary-color;}
 .ant-cascader-menu-rtl .ant-cascader-menu:only-child {border-radius: 2px;}
 .ant-checkbox {color: rgba(0, 0, 0, 0.85);}
 .ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner {border-color: @primary-color;}
-.ant-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;}
+.ant-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;animation-fill-mode: backwards;}
 .ant-checkbox-inner {background-color: #fff;border: 1px solid #d9d9d9;border-radius: 2px;border-collapse: separate;}
 .ant-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
 .ant-checkbox-checked .ant-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
@@ -644,6 +678,15 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .ant-dropdown-menu-dark .ant-dropdown-menu-item-selected, .ant-dropdown-menu-dark .ant-dropdown-menu-item-selected:hover, .ant-dropdown-menu-dark .ant-dropdown-menu-item-selected > a {color: #fff;background: @primary-color;}
 .ant-empty-normal {color: rgba(0, 0, 0, 0.25);}
 .ant-empty-small {color: rgba(0, 0, 0, 0.25);}
+.ant-empty-img-default-ellipse {fill: #f5f5f5;fill-opacity: 0.8;}
+.ant-empty-img-default-path-1 {fill: #aeb8c2;}
+.ant-empty-img-default-path-3 {fill: #f5f5f7;}
+.ant-empty-img-default-path-4 {fill: #dce0e6;}
+.ant-empty-img-default-path-5 {fill: #dce0e6;}
+.ant-empty-img-default-g {fill: #fff;}
+.ant-empty-img-simple-ellipse {fill: #f5f5f5;}
+.ant-empty-img-simple-g {stroke: #d9d9d9;}
+.ant-empty-img-simple-path {fill: #fafafa;}
 .ant-form-item .ant-upload {background: transparent;}
 .ant-form-item .ant-upload.ant-upload-drag {background: #fafafa;}
 .ant-form-item-explain.ant-form-item-explain-error {color: #ff4d4f;}
@@ -706,6 +749,8 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .ant-form-item-label > label .ant-form-item-optional {color: rgba(0, 0, 0, 0.45);}
 .ant-form-item-label > label .ant-form-item-tooltip {color: rgba(0, 0, 0, 0.45);}
 .ant-form-item-explain, .ant-form-item-extra {color: rgba(0, 0, 0, 0.45);}
+.ant-show-help-enter, .ant-show-help-appear {animation-fill-mode: both;}
+.ant-show-help-leave {animation-fill-mode: both;}
 .ant-image-img-placeholder {background-color: #f5f5f5;background-repeat: no-repeat;background-position: center center;background-size: 30%;}
 .ant-image-mask {color: #fff;background: rgba(0, 0, 0, 0.5);}
 .ant-image-preview-mask {background-color: rgba(0, 0, 0, 0.45);}
@@ -999,6 +1044,9 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .anticon.ant-notification-notice-icon-error {color: #ff4d4f;}
 .ant-notification-notice-close {color: rgba(0, 0, 0, 0.45);}
 .ant-notification-notice-close:hover {color: shade(@text-color-secondary, 40%);}
+.ant-notification .notification-fade-effect {animation-fill-mode: both;}
+.ant-notification-fade-enter, .ant-notification-fade-appear {animation-fill-mode: both;}
+.ant-notification-fade-leave {animation-fill-mode: both;}
 .ant-page-header {color: rgba(0, 0, 0, 0.85);background-color: #fff;}
 .ant-page-header-ghost {background-color: inherit;}
 .ant-page-header-back-button {color: @primary-color;color: #000;}
@@ -1064,14 +1112,18 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .ant-progress-steps-item {background: #f3f3f3;}
 .ant-progress-steps-item-active {background: #1890ff;}
 .ant-progress-inner {background-color: #f5f5f5;border-radius: 100px;}
+.ant-progress-circle-trail {stroke: #f5f5f5;}
+.ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {stroke: #1890ff;}
 .ant-progress-success-bg, .ant-progress-bg {background-color: #1890ff;border-radius: 100px;}
 .ant-progress-success-bg {background-color: #52c41a;}
 .ant-progress-text {color: rgba(0, 0, 0, 0.85);}
 .ant-progress-status-active .ant-progress-bg::before {background: #fff;border-radius: 10px;}
 .ant-progress-status-exception .ant-progress-bg {background-color: #ff4d4f;}
 .ant-progress-status-exception .ant-progress-text {color: #ff4d4f;}
+.ant-progress-status-exception .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {stroke: #ff4d4f;}
 .ant-progress-status-success .ant-progress-bg {background-color: #52c41a;}
 .ant-progress-status-success .ant-progress-text {color: #52c41a;}
+.ant-progress-status-success .ant-progress-inner:not(.ant-progress-circle-gradient) .ant-progress-circle-path {stroke: #52c41a;}
 .ant-progress-circle .ant-progress-inner {background-color: transparent;}
 .ant-progress-circle .ant-progress-text {color: rgba(0, 0, 0, 0.85);}
 .ant-progress-circle.ant-progress-status-exception .ant-progress-text {color: #ff4d4f;}
@@ -1082,7 +1134,7 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .ant-radio {color: rgba(0, 0, 0, 0.85);}
 .ant-radio-wrapper:hover .ant-radio, .ant-radio:hover .ant-radio-inner, .ant-radio-input:focus + .ant-radio-inner {border-color: @primary-color;}
 .ant-radio-input:focus + .ant-radio-inner {box-shadow: 0 0 0 3px fade(@radio-dot-color, 8%);}
-.ant-radio-checked::after {border: 1px solid @primary-color;border-radius: 50%;}
+.ant-radio-checked::after {border: 1px solid @primary-color;border-radius: 50%;animation-fill-mode: both;}
 .ant-radio-inner {background-color: #fff;border-color: #d9d9d9;border-style: solid;border-width: 1px;border-radius: 50%;}
 .ant-radio-inner::after {background-color: @primary-color;border-top: 0;border-left: 0;border-radius: 8px;}
 .ant-radio-checked .ant-radio-inner {border-color: @primary-color;}
@@ -1184,6 +1236,7 @@ tr > .ant-picker-cell-in-view.ant-picker-cell-range-hover-start:last-child::afte
 .ant-skeleton-element .ant-skeleton-input {background: rgba(190, 190, 190, 0.2);}
 .ant-skeleton-element .ant-skeleton-image {background: rgba(190, 190, 190, 0.2);}
 .ant-skeleton-element .ant-skeleton-image.ant-skeleton-image-circle {border-radius: 50%;}
+.ant-skeleton-element .ant-skeleton-image-path {fill: #bfbfbf;}
 .ant-skeleton-element .ant-skeleton-image-svg.ant-skeleton-image-circle {border-radius: 50%;}
 .ant-slider {color: rgba(0, 0, 0, 0.85);}
 .ant-slider-rail {background-color: #f5f5f5;border-radius: 2px;}
@@ -1503,7 +1556,7 @@ tr.ant-table-expanded-row:hover > td {background: #fbfbfb;}
 .ant-tree.ant-tree-directory .ant-tree-treenode-selected .ant-tree-node-content-wrapper {color: #fff;background: transparent;}
 .ant-tree-checkbox {color: rgba(0, 0, 0, 0.85);}
 .ant-tree-checkbox-wrapper:hover .ant-tree-checkbox-inner, .ant-tree-checkbox:hover .ant-tree-checkbox-inner, .ant-tree-checkbox-input:focus + .ant-tree-checkbox-inner {border-color: @primary-color;}
-.ant-tree-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;}
+.ant-tree-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;animation-fill-mode: backwards;}
 .ant-tree-checkbox-inner {background-color: #fff;border: 1px solid #d9d9d9;border-radius: 2px;border-collapse: separate;}
 .ant-tree-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
 .ant-tree-checkbox-checked .ant-tree-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
@@ -1538,7 +1591,7 @@ tr.ant-table-expanded-row:hover > td {background: #fbfbfb;}
 .ant-tree-rtl.ant-tree-show-line .ant-tree-indent-unit::before {border-right: none;border-left: 1px solid #d9d9d9;}
 .ant-select-tree-checkbox {color: rgba(0, 0, 0, 0.85);}
 .ant-select-tree-checkbox-wrapper:hover .ant-select-tree-checkbox-inner, .ant-select-tree-checkbox:hover .ant-select-tree-checkbox-inner, .ant-select-tree-checkbox-input:focus + .ant-select-tree-checkbox-inner {border-color: @primary-color;}
-.ant-select-tree-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;}
+.ant-select-tree-checkbox-checked::after {border: 1px solid @primary-color;border-radius: 2px;animation-fill-mode: backwards;}
 .ant-select-tree-checkbox-inner {background-color: #fff;border: 1px solid #d9d9d9;border-radius: 2px;border-collapse: separate;}
 .ant-select-tree-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
 .ant-select-tree-checkbox-checked .ant-select-tree-checkbox-inner::after {border: 2px solid #fff;border-top: 0;border-left: 0;}
@@ -1632,10 +1685,13 @@ a.ant-typography.ant-typography-disabled:hover, .ant-typography a.ant-typography
 .ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error {border-color: #ff4d4f;}
 .ant-upload-list-picture .ant-upload-list-item:hover .ant-upload-list-item-info, .ant-upload-list-picture-card .ant-upload-list-item:hover .ant-upload-list-item-info {background: transparent;}
 .ant-upload-list-picture .ant-upload-list-item-uploading, .ant-upload-list-picture-card .ant-upload-list-item-uploading {border-style: dashed;}
+.ant-upload-list-picture .ant-upload-list-item-error .ant-upload-list-item-thumbnail .anticon svg path[fill='#e6f7ff'], .ant-upload-list-picture-card .ant-upload-list-item-error .ant-upload-list-item-thumbnail .anticon svg path[fill='#e6f7ff'] {fill: #fff2f0;}
+.ant-upload-list-picture .ant-upload-list-item-error .ant-upload-list-item-thumbnail .anticon svg path[fill='#1890ff'], .ant-upload-list-picture-card .ant-upload-list-item-error .ant-upload-list-item-thumbnail .anticon svg path[fill='#1890ff'] {fill: #ff4d4f;}
 .ant-upload-list-picture-card .ant-upload-list-item-info::before {background-color: rgba(0, 0, 0, 0.5);}
 .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-eye, .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-download, .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-delete {color: rgba(255, 255, 255, 0.85);}
 .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-eye:hover, .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-download:hover, .ant-upload-list-picture-card .ant-upload-list-item-actions .anticon-delete:hover {color: #fff;}
 .ant-upload-list-picture-card .ant-upload-list-item-uploading.ant-upload-list-item {background-color: #fafafa;}
+.ant-upload-list .ant-upload-animate-inline-appear, .ant-upload-list .ant-upload-animate-inline-enter, .ant-upload-list .ant-upload-animate-inline-leave {animation-fill-mode: cubic-bezier(0.78, 0.14, 0.15, 0.86);}
 :root {--primary-color: #1890ff;}
 .braft-editor {border: 1px solid #cccccc;border-radius: 6px;}
 :root {--primary-color: #1890ff;}
