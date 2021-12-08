@@ -133,7 +133,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             title: '接口名称',
             dataIndex: 'name',
             fixed: 'left',
-            required: true,
+            width: 200,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },
@@ -141,6 +141,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
             title: '路径',
             dataIndex: 'path',
             ellipsis: true,
+            width: 200,
             tip: '名称过长会自动收缩',
         },
         {
@@ -151,6 +152,7 @@ const FormConf = (modalChange, menuTreeData = []) => {
         {
             title: '所属菜单',
             dataIndex: 'menuName',
+            width: 200,
             render(text, record) {
                 return record?.menuId === 0 ? '公共接口' : text;
             }

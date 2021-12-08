@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tooltip, Tree, Row, Divider } from 'antd';
+import { Tooltip, Tree, Space, Row, Divider } from 'antd';
 import {
     SettingOutlined,
 } from '@ant-design/icons';
@@ -10,13 +10,14 @@ import styles from './index.module.less';
 
 const useTableSetting = ({ columns = [], setFilterColnmnsKey, filterColnmnsKey }) => {
     const [visible, setVisible] = useState(false);
-    const [gData, setGData] = useState([{
-        key: 'all',
+    const dataColnmns = [{
+        key: 'all-tanwei-key-@',
         title: <span>显示列表设置<span style={{ fontSize: 12, color: '#999' }}>（可上下拖动排序）</span></span>,
         children: [
             ...columns
         ]
-    }]);
+    }];
+    const [gData, setGData] = useState(dataColnmns);
 
     const onVisibleChange = (e) => setVisible(e);
 
@@ -26,6 +27,7 @@ const useTableSetting = ({ columns = [], setFilterColnmnsKey, filterColnmnsKey }
     );
 
     const onDrop = info => {
+        console.log(info, 'info');
         if (info.node.key === 'all') {
             return;
         }
@@ -86,6 +88,7 @@ const useTableSetting = ({ columns = [], setFilterColnmnsKey, filterColnmnsKey }
         }
         setGData(data);
         const targetKey = [];
+        // 顺序根据交换后的来处理
         data[0]?.children?.forEach(val => {
             filterColnmnsKey.forEach(item => {
                 if (val.key === item) {
@@ -97,46 +100,60 @@ const useTableSetting = ({ columns = [], setFilterColnmnsKey, filterColnmnsKey }
     };
     const reset = () => {
         setFilterColnmnsKey(columns.map(val => val.key));
+        setGData(dataColnmns);
     };
     const onCheck = (checkedKeys) => {
-        setFilterColnmnsKey(checkedKeys);
+        // 因为涉及到fixed定位 所以顺序归类
+        const leftFixed = [];
+        const center = [];
+        const rightFixed = [];
+        gData[0]?.children?.forEach(item => {
+            if (checkedKeys.includes(item.key)) {
+                if (item.fixed === 'left') {
+                    leftFixed.push(item.key);
+                } else if (item.fixed === 'right') {
+                    rightFixed.push(item.key);
+                } else {
+                    center.push(item.key);
+                }
+            }
+        });
+        setFilterColnmnsKey([...leftFixed, ...center, ...rightFixed]);
     };
     const menu = <div className={menuClass} >
-        <Row className={styles['wrapper-title-tool-tableSetting-title']} justify="space-between" align="middle">
-            <WrapperButton
-                type={'primary'}
-                size={'small'}
-                onClick={reset}
-            >
-                重置
-            </WrapperButton>
+        <Row className={styles['wrapper-title-tool-tableSetting-title']} justify="start" align="middle">
+            <Space>
+                <WrapperButton
+                    type={'primary'}
+                    size={'small'}
+                    onClick={reset}
+                >
+                    重置
+                </WrapperButton>
+                {/* <WrapperButton
+                    type={'primary'}
+                    size={'small'}
+                    onClick={reset}
+                >
+                    保存
+                </WrapperButton> */}
+            </Space>
         </Row>
         <Divider className={styles['wrapper-title-tool-tableSetting-divider']} />
 
         <Tree
             className="table-setting-draggable-tree"
             draggable
-            expandedKeys={['all']}
+            expandedKeys={['all-tanwei-key-@']}
             blockNode
             checkedKeys={filterColnmnsKey}
             onCheck={onCheck}
             checkable
             selectable={false}
-            allowDrop={(e) => e.dropPosition === 1}
+            allowDrop={(e) => !e.dropNode.disabled && e.dropPosition === 1 && !(e.dropNode.fixed === 'left') && !(e.dropNode.fixed === 'right')}
             onDrop={onDrop}
             treeData={gData}
         />
-        {/* <Divider className={styles['wrapper-title-tool-tableSetting-divider']} /> */}
-
-        {/* <Row justify="end" align="middle">
-            <WrapperButton
-                type={'primary'}
-                size={'small'}
-                onClick={reset}
-            >
-                保存
-            </WrapperButton>
-        </Row> */}
     </div>;
     return (
         <div>

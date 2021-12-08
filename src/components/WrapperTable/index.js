@@ -13,7 +13,8 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
         return {
             title: val.title,
             key: val.dataIndex,
-            disabled: val.required || val.fixed, // 固定的和required 不可以取消选择和拖动
+            disabled: val.required || val.fixed === 'left' || val.fixed === 'right', // 固定的和required 不可以取消选择和拖动
+            fixed: val.fixed
         };
     });
     /**
@@ -32,15 +33,24 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
     const wrapperColumns = useCallback(() => UseWrapperColumns(columns, pagination), [columns, pagination])();
 
     // 获取过滤和排序后的columns
-    const filterColnmnsData = [];
+    let filterColnmnsData = [];
+    let allFixed = 0;
     filterColnmnsKey.forEach(val => {
         wrapperColumns.forEach(item => {
             if (item.dataIndex === val) {
+                (item.fixed === 'left' || item.fixed === 'right') && (allFixed += 1);
                 filterColnmnsData.push(item);
             }
         });
     });
-
+    // 如果都是fixed，那么全部取消fixed
+    if (filterColnmnsData?.length === allFixed) {
+        const fiterFixedColnmns = filterColnmnsData.map(val => {
+            const { fixed, ...restProps } = val;
+            return restProps;
+        });
+        filterColnmnsData = [...fiterFixedColnmns];
+    }
     return (
         <div className={'t-table'}>
             <Table

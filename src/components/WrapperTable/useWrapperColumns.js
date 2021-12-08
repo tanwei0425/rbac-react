@@ -69,7 +69,15 @@ function UseWrapperColumns(columns, pagination) {
             /**
              * 文本省略增加鼠标移入显示全部文本功能
              */
-            val?.ellipsis && (val.render = text => <Tooltip arrowPointAtCenter placement="left" title={text}>{text}</Tooltip>);
+            val?.ellipsis && (val.render = text => <Tooltip arrowPointAtCenter placement="left" title={text}>
+                <span style={{
+                    display: 'inline-block',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    maxWidth: val.width
+                }}>{text}</span>
+            </Tooltip>);
         }), [pagination, columns]);
     return columns;
 }

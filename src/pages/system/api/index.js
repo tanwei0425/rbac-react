@@ -147,7 +147,7 @@ const Index = () => {
                 loading={tableRequestRes.loading}
                 title={() => '接口管理列表'}
                 onChange={onChange}
-                scroll={{ x: 1000 }}
+                scroll={{ x: 'max-content' }}
                 toolBarRender={[
                     <WrapperButton
                         type={'primary'}
