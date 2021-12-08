@@ -129,7 +129,7 @@ const Index = () => {
                 loading={tableRequestRes.loading}
                 title={() => '分类管理列表'}
                 onChange={onChange}
-                scroll={{ x: 800 }}
+                scroll={{ x: 'max-content' }}
                 toolBarRender={[
                     <WrapperButton
                         type={'primary'}

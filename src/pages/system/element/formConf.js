@@ -102,17 +102,32 @@ const FormConf = (modalChange, menuTreeData = []) => {
     ];
     const columns = [
         {
+            title: '序号',
+            dataIndex: 'id',
+            fixed: 'left',
+            valueType: 'indexBorder',
+            required: true,
+            width: 80,
+        },
+        {
             title: '元素名称',
             dataIndex: 'name',
             fixed: 'left',
+            width: 200,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '元素编码',
             dataIndex: 'code',
+            ellipsis: true,
+            width: 200,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '所属菜单',
             dataIndex: 'menuName',
+            width: 200,
             render(text, record) {
                 return record?.menuId === 0 ? '公共接口' : text;
             }

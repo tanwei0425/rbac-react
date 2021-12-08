@@ -146,11 +146,14 @@ const FormConf = ({ modalChange, formSchemaChange }) => {
             ellipsis: true,
             width: 180,
             fixed: 'left',
+            tip: '名称过长会自动收缩',
         },
         {
             title: '菜单编码',
             dataIndex: 'code',
             width: 120,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '菜单类型',
@@ -165,11 +168,15 @@ const FormConf = ({ modalChange, formSchemaChange }) => {
             title: '路由地址',
             dataIndex: 'path',
             width: 180,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '组件路径',
             dataIndex: 'cmpPath',
             width: 180,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '是否显示',
@@ -199,13 +206,11 @@ const FormConf = ({ modalChange, formSchemaChange }) => {
             dataIndex: 'sort',
             width: 80,
         },
-
         {
             title: '创建时间',
             dataIndex: 'createdAt',
             width: 180,
             render: (text) => dateTimeFormat(text)
-
         },
         {
             title: '操作',

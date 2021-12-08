@@ -134,21 +134,25 @@ const FormConf = (modalChange, allNotesClassData = []) => {
         {
             title: '序号',
             dataIndex: 'id',
+            fixed: 'left',
             valueType: 'indexBorder',
+            required: true,
             width: 80,
         },
         {
             title: '文章标题',
             dataIndex: 'title',
+            fixed: 'left',
+            width: 180,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },
         {
             title: '文章分类',
             dataIndex: 'classification',
+            width: 150,
             render(text) {
-                const name = tableColumnToDict(allNotesClassData, text);
-                return name;
+                return tableColumnToDict(allNotesClassData, text);
             }
         },
         {
@@ -163,12 +167,14 @@ const FormConf = (modalChange, allNotesClassData = []) => {
         {
             title: '文章作者',
             dataIndex: 'author',
+            width: 100,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },
         {
             title: '发布用户',
             dataIndex: 'createUserName',
+            width: 100,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },

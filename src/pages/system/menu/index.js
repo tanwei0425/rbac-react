@@ -102,7 +102,7 @@ const Index = () => {
                 rowKey={'id'}
                 loading={tableRequestRes.loading}
                 title={() => '菜单管理列表'}
-                scroll={{ x: 1300 }}
+                scroll={{ x: 'max-content' }}
                 toolBarRender={[
                     <WrapperButton
                         type={'primary'}

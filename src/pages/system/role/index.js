@@ -246,7 +246,7 @@ const Index = () => {
                 loading={tableRequest.loading}
                 title={() => '角色管理列表'}
                 onChange={onChange}
-                scroll={{ x: 1000 }}
+                scroll={{ x: 'max-content' }}
                 toolBarRender={[
                     <WrapperButton
                         type={'primary'}

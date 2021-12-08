@@ -101,21 +101,37 @@ const FormConf = (modalChange) => {
     ];
     const columns = [
         {
+            title: '序号',
+            dataIndex: 'id',
+            fixed: 'left',
+            valueType: 'indexBorder',
+            required: true,
+            width: 80,
+        },
+        {
             title: '用户名称',
             dataIndex: 'username',
             fixed: 'left',
+            width: 150,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '真实姓名',
             dataIndex: 'name',
+            width: 120,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '手机号',
             dataIndex: 'phone',
+            width: 160,
         },
         {
             title: '状态',
             dataIndex: 'status',
+            width: 80,
             render(text) {
                 const name = tableColumnToDict(dictAllData?.status, text);
                 return <Tag color={text === '1' ? '#87d068' : '#ff4d4f'}>{name}</Tag>;
@@ -124,6 +140,7 @@ const FormConf = (modalChange) => {
         {
             title: '创建时间',
             dataIndex: 'createdAt',
+            width: 180,
             render: (text) => dateTimeFormat(text)
 
         },

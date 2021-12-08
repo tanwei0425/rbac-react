@@ -67,13 +67,25 @@ const FormConf = (modalChange, transferChange) => {
     ];
     const columns = [
         {
+            title: '序号',
+            dataIndex: 'id',
+            fixed: 'left',
+            valueType: 'indexBorder',
+            required: true,
+            width: 80,
+        },
+        {
             title: '角色名称',
             dataIndex: 'name',
             fixed: 'left',
+            ellipsis: true,
+            width: 200,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '状态',
             dataIndex: 'status',
+            width: 80,
             render(text) {
                 const name = tableColumnToDict(dictAllData?.status, text);
                 return <Tag color={text === '1' ? '#87d068' : '#ff4d4f'}>{name}</Tag>;
@@ -82,10 +94,14 @@ const FormConf = (modalChange, transferChange) => {
         {
             title: '角色描述',
             dataIndex: 'description',
+            ellipsis: true,
+            width: 200,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '创建时间',
             dataIndex: 'createdAt',
+            width: 180,
             render: (text) => dateTimeFormat(text)
 
         },

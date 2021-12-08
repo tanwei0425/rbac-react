@@ -80,12 +80,16 @@ const FormConf = (modalChange) => {
         {
             title: '序号',
             dataIndex: 'id',
+            fixed: 'left',
             valueType: 'indexBorder',
+            required: true,
             width: 80,
         },
         {
             title: '分类名称',
             dataIndex: 'name',
+            fixed: 'left',
+            width: 150,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },
@@ -109,6 +113,7 @@ const FormConf = (modalChange) => {
         {
             title: '分类描述',
             dataIndex: 'description',
+            width: 200,
             ellipsis: true,
             tip: '名称过长会自动收缩',
         },
