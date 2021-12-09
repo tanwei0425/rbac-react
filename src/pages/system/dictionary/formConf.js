@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 import TableActionsRender from '@/components/WrapperTable/tableActionsRender';
 import { EditIcon, DeleteIcon } from '@/static/Icon';
 import { tableColumnToDict, dateTimeFormat } from '@/utils/utils';
-const FormConf = (modalChange, menuTreeData = []) => {
+const FormConf = (modalChange) => {
     const { dictAllData } = useSelector((state) => state.common);
     const formSchema = [
         {
@@ -21,38 +21,15 @@ const FormConf = (modalChange, menuTreeData = []) => {
         },
         {
             className: "formItem",
-            name: "path",
-            label: '路径',
+            name: "code",
+            label: '字典编码',
             rules: [
-                { required: true, whitespace: true, message: "路径不能为空" },
+                { required: true, whitespace: true, message: "字典编码不能为空" },
+                { min: 4, max: 35, message: "字典编码名长度在4到35个字符" },
             ],
             fieldProps: {
                 componentType: "input",
-                placeholder: "请输入路径",
-            },
-        },
-        {
-            className: "serachFormItem",
-            name: "method",
-            label: '方法',
-            rules: [{ required: true, message: "字典状态不能为空" }],
-            fieldProps: {
-                componentType: "select",
-                options: dictAllData?.method,
-                placeholder: "请选择方法",
-            },
-        },
-        {
-            className: "formItem",
-            name: "menuId",
-            label: '所属菜单',
-            rules: [
-                { required: true, message: "所属菜单不能为空" },
-            ],
-            fieldProps: {
-                componentType: "treeSelect",
-                treeData: menuTreeData,
-                placeholder: "请选择所属菜单",
+                placeholder: "请输入字典编码",
             },
         },
         {
@@ -66,6 +43,37 @@ const FormConf = (modalChange, menuTreeData = []) => {
                 options: dictAllData?.status,
                 placeholder: "请选择字典状态",
             },
+        },
+        {
+            name: "data",
+            formList: [
+                {
+                    className: "formItem",
+                    name: "key",
+                    label: '字典key',
+                    rules: [
+                        { required: true, whitespace: true, message: "字典key不能为空" },
+                        { min: 2, max: 15, message: "字典key长度在2到15个字符" },
+                    ],
+                    fieldProps: {
+                        componentType: "input",
+                        placeholder: "请输入字典key",
+                    },
+                },
+                {
+                    className: "formItem",
+                    name: "value",
+                    label: '字典value',
+                    rules: [
+                        { required: true, whitespace: true, message: "字典value不能为空" },
+                        { min: 2, max: 15, message: "字典value长度在2到15个字符" },
+                    ],
+                    fieldProps: {
+                        componentType: "input",
+                        placeholder: "请输入字典value",
+                    },
+                },
+            ]
         },
         {
             className: "formItem",
@@ -90,22 +98,11 @@ const FormConf = (modalChange, menuTreeData = []) => {
         },
         {
             className: "serachFormItem",
-            name: "menuId",
-            label: '所属菜单',
+            name: "code",
+            label: '字典编码',
             fieldProps: {
-                componentType: "treeSelect",
-                treeData: menuTreeData,
-                placeholder: "请选择所属菜单",
-            },
-        },
-        {
-            className: "serachFormItem",
-            name: "method",
-            label: '方法',
-            fieldProps: {
-                componentType: "select",
-                options: dictAllData?.method,
-                placeholder: "请选择方法",
+                componentType: "input",
+                placeholder: "请输入字典编码",
             },
         },
         {
@@ -133,8 +130,15 @@ const FormConf = (modalChange, menuTreeData = []) => {
             title: '字典名称',
             dataIndex: 'name',
             fixed: 'left',
-            width: 200,
+            width: 180,
             ellipsis: true,
+            tip: '名称过长会自动收缩',
+        },
+        {
+            title: '字典编码',
+            dataIndex: 'code',
+            ellipsis: true,
+            width: 150,
             tip: '名称过长会自动收缩',
         },
         {
@@ -145,6 +149,11 @@ const FormConf = (modalChange, menuTreeData = []) => {
                 const name = tableColumnToDict(dictAllData?.status, text);
                 return <Tag color={text === '1' ? '#87d068' : '#ff4d4f'}>{name}</Tag>;
             }
+        },
+        {
+            title: '描述',
+            dataIndex: 'cre1atedAt',
+            width: 150,
         },
         {
             title: '创建时间',

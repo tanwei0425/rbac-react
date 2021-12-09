@@ -5,7 +5,7 @@ const formItemLayout = {
     wrapperCol: { span: 18 },
 };
 
-const { Item: FormItem, useForm } = Form;
+const { Item: FormItem, List: FormList, useForm } = Form;
 
 const Index = ({ children, ...restProps }) => {
     return (
@@ -22,5 +22,6 @@ const Index = ({ children, ...restProps }) => {
 export {
     Index as default,
     FormItem,
+    FormList,
     useForm
 };

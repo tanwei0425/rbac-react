@@ -6,7 +6,7 @@
  * @LastEditTime: 2020-05-21 09:22:55
  */
 import React from "react";
-import WrapperForm, { FormItem, useForm } from '@/components/FormElements/WrapperForm';
+import WrapperForm, { FormItem, FormList, useForm } from '@/components/FormElements/WrapperForm';
 import Input from '@/components/FormElements/Input';
 import InputNumber from '@/components/FormElements/InputNumber';
 import Select from '@/components/FormElements/Select';
@@ -53,5 +53,6 @@ export {
     WrapperForm as default,
     FormRenderComponent,
     FormItem,
+    FormList,
     useForm
 };

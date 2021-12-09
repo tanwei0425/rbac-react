@@ -4,16 +4,13 @@ import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
 import SearchForm from '@/components/SearchForm';
-import request from '@/services/api';
-import menuRequest from '@/services/menu';
-import { arrayToTree, formatTreeSelect } from '@/utils/utils';
+import request from '@/services/dictionary';
 import Operate from './operate';
 import FormConf from './formConf';
 
 const Index = () => {
     const [form] = useForm();
     const [dataSource, setDataSource] = useState([]);
-    const [menuTreeData, setMenuTreeData] = useState([]);
     const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
     const [searchFormData, setSearchFormData] = useState({
         status: '1'
@@ -27,12 +24,11 @@ const Index = () => {
         width: 640,
     };
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
-    const detailsRequestRes = useRequest(request.getApiDetail, { manual: true });
-    const tableRequestRes = useRequest(request.getApiTable, { manual: true });
-    const createRequestRes = useRequest(request.createApi, { manual: true });
-    const updateRequestRes = useRequest(request.updateApi, { manual: true });
-    const deleteRequestRes = useRequest(request.deleteApi, { manual: true });
-    const menuListRes = useRequest(menuRequest.getMenuTable, { manual: true });
+    const detailsRequestRes = useRequest(request.getDictionaryDetail, { manual: true });
+    const tableRequestRes = useRequest(request.getDictionaryTable, { manual: true });
+    const createRequestRes = useRequest(request.createDictionary, { manual: true });
+    const updateRequestRes = useRequest(request.updateDictionary, { manual: true });
+    const deleteRequestRes = useRequest(request.deleteDictionary, { manual: true });
 
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
@@ -105,19 +101,7 @@ const Index = () => {
         pagination?.pageSize,
         searchFormData
     ]);
-    useEffect(() => {
-        getMenuListData();
-    }, []);
 
-    const getMenuListData = async () => {
-        const res = await menuListRes.run();
-        if (res?.code === 200) {
-            const dataSource = arrayToTree(res?.data || []);
-            const menuTreeData = formatTreeSelect(dataSource, { title: 'name', value: 'id' });
-            const topMenuTreeData = [{ value: 0, title: '公共字典' }, ...menuTreeData];
-            setMenuTreeData(topMenuTreeData);
-        }
-    };
     const reset = () => {
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ status: '1' });
@@ -128,7 +112,7 @@ const Index = () => {
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ ...values });
     };
-    const { formSchema, searchFormSchema, columns } = FormConf(modalChange, menuTreeData);
+    const { formSchema, searchFormSchema, columns } = FormConf(modalChange);
     return (
         <>
             <SearchForm
@@ -136,7 +120,7 @@ const Index = () => {
                 reset={reset}
                 formSchema={searchFormSchema}
                 formConfig={{
-                    name: 'apiSearchForm',
+                    name: 'dictionarySearchForm',
                     onFinish: onFinish
                 }}
             />
