@@ -25,7 +25,6 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                             return <FormList
                                 key={val.name}
                                 {...restFiled}
-                                initialValue={[{ key: '', value: '' }]}
                             >
                                 {(fields, { add, remove }) =>
                                     <>

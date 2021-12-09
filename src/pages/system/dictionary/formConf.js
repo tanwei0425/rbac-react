@@ -46,6 +46,7 @@ const FormConf = (modalChange) => {
         },
         {
             name: "data",
+            initialValue: [{ key: '', value: '' }],
             formList: [
                 {
                     className: "formItem",
