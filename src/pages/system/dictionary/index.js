@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { DownloadOutlined } from '@ant-design/icons';
 import { useForm } from '@/components/FormElements';
 import WrapperTable from '@/components/WrapperTable';
 import WrapperButton from '@/components/WrapperButton';
 import SearchForm from '@/components/SearchForm';
-import request from '@/services/user';
-import roleRequest from '@/services/role';
+import request from '@/services/api';
+import menuRequest from '@/services/menu';
+import { arrayToTree, formatTreeSelect } from '@/utils/utils';
 import Operate from './operate';
 import FormConf from './formConf';
-import { formatOptions, exportStreamFile } from '@/utils/utils';
+
 const Index = () => {
     const [form] = useForm();
     const [dataSource, setDataSource] = useState([]);
-    const [roleAll, setRoleAll] = useState([]);
-
+    const [menuTreeData, setMenuTreeData] = useState([]);
     const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
     const [searchFormData, setSearchFormData] = useState({
         status: '1'
@@ -28,36 +27,24 @@ const Index = () => {
         width: 640,
     };
     const [modalConfig, setModalConfig] = useState(iniModalConifg);
-    const detailsRequestRes = useRequest(request.getUserDetail, { manual: true });
-    const tableRequestRes = useRequest(request.getUserTable, { manual: true });
-    const createRequestRes = useRequest(request.createUser, { manual: true });
-    const updateRequestRes = useRequest(request.updateUser, { manual: true });
-    const deleteRequestRes = useRequest(request.deleteUser, { manual: true });
-    const reloadRequestRes = useRequest(request.reloadPwd, { manual: true });
-    const exportUserRes = useRequest(request.exportUser, { manual: true });
-    const allRoleRequestRes = useRequest(roleRequest.allRole, { manual: true });
+    const detailsRequestRes = useRequest(request.getApiDetail, { manual: true });
+    const tableRequestRes = useRequest(request.getApiTable, { manual: true });
+    const createRequestRes = useRequest(request.createApi, { manual: true });
+    const updateRequestRes = useRequest(request.updateApi, { manual: true });
+    const deleteRequestRes = useRequest(request.deleteApi, { manual: true });
+    const menuListRes = useRequest(menuRequest.getMenuTable, { manual: true });
 
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
-        if (res.code === 200) {
+        if (res?.code === 200) {
             form.setFieldsValue({ ...res?.data });
         }
     };
 
-    const getAllrole = async () => {
-        const res = await allRoleRequestRes.run();
-        if (res.code === 200) {
-            res.data = formatOptions(res.data, { title: 'name', value: 'id' }, { title: 'value', value: 'key' }, true);
-            setRoleAll(res.data || []);
-        }
-    };
     const modalChange = async (type, title, record) => {
         setModalType(type);
-        if (type === 'create' || type === 'update') {
-            getAllrole();
+        if (type === 'update' || type === 'delete') {
             type === 'update' && getDetail(record.id);
-        }
-        if (type === 'update' || type === 'delete' || type === 'reload') {
             setTableRecord(record);
         }
         setModalConfig({ ...modalConfig, title, visible: true });
@@ -76,13 +63,6 @@ const Index = () => {
                         getTableData();
                     }
                 });
-        } else if (modalType === 'reload') {
-            const res = await reloadRequestRes.run({ id: tableRecord.id });
-            if (res?.code === 200) {
-                window.message.success('操作成功');
-                hanleCancel();
-                getTableData();
-            }
         } else if (modalType === 'delete') {
             const res = await deleteRequestRes.run({ id: tableRecord.id });
             if (res?.code === 200) {
@@ -125,6 +105,19 @@ const Index = () => {
         pagination?.pageSize,
         searchFormData
     ]);
+    useEffect(() => {
+        getMenuListData();
+    }, []);
+
+    const getMenuListData = async () => {
+        const res = await menuListRes.run();
+        if (res?.code === 200) {
+            const dataSource = arrayToTree(res?.data || []);
+            const menuTreeData = formatTreeSelect(dataSource, { title: 'name', value: 'id' });
+            const topMenuTreeData = [{ value: 0, title: '公共字典' }, ...menuTreeData];
+            setMenuTreeData(topMenuTreeData);
+        }
+    };
     const reset = () => {
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ status: '1' });
@@ -135,19 +128,7 @@ const Index = () => {
         setPagination({ current: 1, pageSize: 10, total: 0 });
         setSearchFormData({ ...values });
     };
-
-    const exportUser = async () => {
-        window.message.warning('数据导出用时较长，请到浏览器下载列表中查看！', 6);
-        const res = await exportUserRes.run(searchFormData);
-        try {
-            // 处理返回的文件流
-            exportStreamFile(res?.data, res?.filename);
-        } catch (error) {
-            window.message.error('导出异常');
-        }
-    };
-
-    const { formSchema, searchFormSchema, columns } = FormConf(modalChange);
+    const { formSchema, searchFormSchema, columns } = FormConf(modalChange, menuTreeData);
     return (
         <>
             <SearchForm
@@ -155,8 +136,8 @@ const Index = () => {
                 reset={reset}
                 formSchema={searchFormSchema}
                 formConfig={{
-                    name: 'userSearchForm',
-                    onFinish,
+                    name: 'apiSearchForm',
+                    onFinish: onFinish
                 }}
             />
             <WrapperTable
@@ -164,23 +145,15 @@ const Index = () => {
                 columns={columns}
                 rowKey={'id'}
                 loading={tableRequestRes.loading}
-                title={() => '用户管理列表'}
+                title={() => '字典管理列表'}
                 onChange={onChange}
                 toolBarRender={[
                     <WrapperButton
-                        type={'dashed'}
-                        authButStatus='export-user'
-                        icon={<DownloadOutlined />}
-                        onClick={exportUser}
-                    >
-                        导出用户
-                    </WrapperButton>,
-                    <WrapperButton
                         type={'primary'}
-                        authButStatus='add-user'
-                        onClick={() => modalChange('create', '添加用户')}
+                        onClick={() => modalChange('create', '添加字典')}
+                        authButStatus='add-api'
                     >
-                        添加用户
+                        添加字典
                     </WrapperButton>,
                 ]}
                 pagination={pagination}
@@ -189,18 +162,14 @@ const Index = () => {
                 modalType={modalType}
                 formSchema={formSchema}
                 tableRecord={tableRecord}
-                roleAll={roleAll}
-                rolesLoading={allRoleRequestRes.loading}
                 formConfig={{
                     form,
-                    initialValues: {
-                        status: '1'
-                    }
                 }}
                 modalConfig={{
+                    draggable: true,
                     onOk: hanleOnOk,
                     onCancel: hanleCancel,
-                    confirmLoading: detailsRequestRes.loading || createRequestRes.loading || updateRequestRes.loading || deleteRequestRes.loading || reloadRequestRes.loading,
+                    confirmLoading: detailsRequestRes.loading || createRequestRes.loading || updateRequestRes.loading || deleteRequestRes.loading,
                     ...modalConfig,
                 }}
             />

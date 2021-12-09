@@ -39,6 +39,9 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
         wrapperColumns.forEach(item => {
             if (item.dataIndex === val) {
                 (item.fixed === 'left' || item.fixed === 'right') && (allFixed += 1);
+                // 因为 scroll={{ x: '100%' }} 设置的百分之100，所以没有宽度的话，会被挤没
+                if (!item.width) item.width = 150;
+                // 当前可显示的 colnmns
                 filterColnmnsData.push(item);
             }
         });
@@ -66,6 +69,8 @@ const Index = ({ title, toolBarRender, pagination, columns, size = "small", ...r
                 }}
                 columns={filterColnmnsData || []}
                 {...restProps}
+                // 因为列排序和拖动，强制这个属性
+                scroll={{ x: '100%' }}
             />
         </div>
     );

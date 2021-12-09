@@ -29,7 +29,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                     })}
                 </WrapperForm>
             }
-            {modalType === 'delete' && <span>是否要删除接口名称为<span style={{ color: 'red', fontSize: 16 }}>{tableRecord?.name}</span>的接口，删除后数据不可恢复，请谨慎操作。</span>}
+            {modalType === 'delete' && <span>是否要删除文章名称为<span style={{ color: 'red', fontSize: 16 }}>{tableRecord?.name}</span>的文章，删除后数据不可恢复，请谨慎操作。</span>}
         </WrapperModal>
     );
 };
