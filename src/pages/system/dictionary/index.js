@@ -33,7 +33,8 @@ const Index = () => {
     const getDetail = async (id) => {
         const res = await detailsRequestRes.run({ id });
         if (res?.code === 200) {
-            form.setFieldsValue({ ...res?.data });
+            const { value, ...rest } = res.data;
+            form.setFieldsValue({ ...rest, value: value ? JSON.parse(value) : [] });
         }
     };
 
@@ -52,6 +53,7 @@ const Index = () => {
                 .then(async (values) => {
                     const request = modalType === 'update' ? updateRequestRes : createRequestRes;
                     modalType === 'update' && (values.id = tableRecord.id);
+                    values.value = values.value ? JSON.stringify(values.value) : [];
                     const res = await request.run(values);
                     if (res?.code === 200) {
                         window.message.success('操作成功');
@@ -135,7 +137,7 @@ const Index = () => {
                     <WrapperButton
                         type={'primary'}
                         onClick={() => modalChange('create', '添加字典')}
-                        authButStatus='add-api'
+                        authButStatus='add-dictionary'
                     >
                         添加字典
                     </WrapperButton>,

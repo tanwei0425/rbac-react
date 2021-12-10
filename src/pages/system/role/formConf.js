@@ -24,11 +24,11 @@ const FormConf = (modalChange, transferChange) => {
             className: "formItem",
             name: "status",
             label: '角色状态',
-            initialValue: '1',
             rules: [{ required: true, message: "角色状态不能为空" }],
+            initialValue: '1',
             fieldProps: {
+                componentType: "radio",
                 options: dictAllData?.status,
-                componentType: "select",
                 placeholder: "请选择角色状态",
             },
         },

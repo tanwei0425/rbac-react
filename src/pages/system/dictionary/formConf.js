@@ -45,16 +45,27 @@ const FormConf = (modalChange) => {
             },
         },
         {
-            name: "data",
+            className: "formItem",
+            name: "description",
+            label: '字典描述',
+            fieldProps: {
+                componentType: "textArea",
+                placeholder: "请输入字典描述",
+                maxLength: 30,
+            },
+        },
+        {
+            name: "value",
             initialValue: [{ key: '', value: '' }],
+            title: '字典数据',
             formList: [
                 {
                     className: "formItem",
                     name: "key",
-                    label: '字典key',
+                    label: 'key',
                     rules: [
-                        { required: true, whitespace: true, message: "字典key不能为空" },
-                        { min: 2, max: 15, message: "字典key长度在2到15个字符" },
+                        { required: true, whitespace: true, message: "key不能为空" },
+                        { max: 15, message: "key长度不能超过15个字符" },
                     ],
                     fieldProps: {
                         componentType: "input",
@@ -64,10 +75,10 @@ const FormConf = (modalChange) => {
                 {
                     className: "formItem",
                     name: "value",
-                    label: '字典value',
+                    label: 'value',
                     rules: [
-                        { required: true, whitespace: true, message: "字典value不能为空" },
-                        { min: 2, max: 15, message: "字典value长度在2到15个字符" },
+                        { required: true, whitespace: true, message: "value不能为空" },
+                        { max: 15, message: "value长度不能超过15个字符" },
                     ],
                     fieldProps: {
                         componentType: "input",
@@ -75,16 +86,6 @@ const FormConf = (modalChange) => {
                     },
                 },
             ]
-        },
-        {
-            className: "formItem",
-            name: "description",
-            label: '字典描述',
-            fieldProps: {
-                componentType: "textArea",
-                placeholder: "请输入字典描述",
-                maxLength: 30,
-            },
         },
     ];
     const searchFormSchema = [
@@ -153,8 +154,10 @@ const FormConf = (modalChange) => {
         },
         {
             title: '描述',
-            dataIndex: 'cre1atedAt',
+            dataIndex: 'description',
             width: 150,
+            ellipsis: true,
+            tip: '名称过长会自动收缩',
         },
         {
             title: '创建时间',
@@ -175,7 +178,7 @@ const FormConf = (modalChange) => {
                         onClick: (props) => modalChange('update', '编辑字典', props),
                         tip: '编辑字典',
                         type: "primary",
-                        authButStatus: 'edit-api',
+                        authButStatus: 'edit-dictionary',
                     },
                     {
                         key: 'delete',
@@ -184,7 +187,7 @@ const FormConf = (modalChange) => {
                         tip: '删除字典',
                         type: "primary",
                         danger: true,
-                        authButStatus: 'delete-api',
+                        authButStatus: 'delete-dictionary',
                     },
                 ];
                 return <TableActionsRender data={data} record={record} />;

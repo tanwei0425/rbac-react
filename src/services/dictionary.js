@@ -9,27 +9,27 @@
 
 import { servicesPath } from '@/config';
 const getDictionaryTable = (data) => ({
-    url: `${servicesPath}/v1/api`,
+    url: `${servicesPath}/v1/dictionary`,
     method: 'get',
     data,
 });
 const createDictionary = (data) => ({
-    url: `${servicesPath}/v1/api`,
+    url: `${servicesPath}/v1/dictionary`,
     method: 'post',
     data,
 });
 const getDictionaryDetail = ({ id, ...rest }) => ({
-    url: `${servicesPath}/v1/api/${id}`,
+    url: `${servicesPath}/v1/dictionary/${id}`,
     method: 'get',
     data: rest,
 });
 const updateDictionary = ({ id, ...rest }) => ({
-    url: `${servicesPath}/v1/api/${id}`,
+    url: `${servicesPath}/v1/dictionary/${id}`,
     method: 'put',
     data: rest,
 });
 const deleteDictionary = ({ id, ...rest }) => ({
-    url: `${servicesPath}/v1/api/${id}`,
+    url: `${servicesPath}/v1/dictionary/${id}`,
     method: 'delete',
     data: rest,
 });

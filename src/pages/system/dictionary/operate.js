@@ -1,8 +1,8 @@
 import React from 'react';
+import { Space, Divider } from 'antd';
 import WrapperForm, { FormItem, FormList, FormRenderComponent } from '@/components/FormElements';
 import WrapperModal from '@/components/WrapperModal';
 import WrapperButton from '@/components/WrapperButton';
-import { Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const formListItemLayout = {
@@ -20,7 +20,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                     {...formConfig}
                 >
                     {formSchema?.map(val => {
-                        const { fieldProps, formList, ...restFiled } = val;
+                        const { fieldProps, title, formList, ...restFiled } = val;
                         if (formList && Array.isArray(formList)) {
                             return <FormList
                                 key={val.name}
@@ -28,16 +28,17 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                             >
                                 {(fields, { add, remove }) =>
                                     <>
+                                        <Divider orientation="left">{title}</Divider>
                                         {fields.map(field =>
-                                            <Space style={{ width: '84%', margin: 'auto 8%' }} key={field.key} align="baseline">
+                                            <Space style={{ width: '86%', marginLeft: '8%' }} key={field.key} align="baseline">
                                                 {
                                                     formList?.map(item => {
-                                                        console.log(fields, 'fields');
-                                                        const { fieldProps, name, ...restFiled } = item;
+                                                        const { fieldProps, name, label, ...restFiled } = item;
                                                         return <FormItem
                                                             {...formListItemLayout}
                                                             {...field}
                                                             {...restFiled}
+                                                            label={`${label}${field.name + 1}`}
                                                             name={[field.name, name]}
                                                             fieldKey={[field.fieldKey, name]}
                                                         >
@@ -45,7 +46,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                                                         </FormItem>;
                                                     })
                                                 }
-                                                {fields.length > 1 && <MinusCircleOutlined onClick={() => remove(field.name)} />}
+                                                {fields.length > 1 && <MinusCircleOutlined style={{ fontSize: 18, marginLeft: 10, color: 'red' }} onClick={() => remove(field.name)} />}
                                             </Space>
                                         )}
                                         <FormItem
@@ -53,7 +54,7 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                                             {...formListItemLayout}
                                         >
                                             <WrapperButton type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                                添加
+                                                添加字典数据
                                             </WrapperButton>
                                         </FormItem>
                                     </>
@@ -69,7 +70,6 @@ const Index = ({ formSchema, modalType, tableRecord, formConfig, modalConfig }) 
                             </FormItem>;
                         }
                     })}
-
                 </WrapperForm>
             }
             {modalType === 'delete' && <span>是否要删除字典名称为<span style={{ color: 'red', fontSize: 16 }}>{tableRecord?.name}</span>的字典，删除后数据不可恢复，请谨慎操作。</span>}

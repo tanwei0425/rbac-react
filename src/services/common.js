@@ -35,7 +35,7 @@ const getCaptcha = (data) => ({
     data,
 });
 const getDictAll = () => ({
-    url: `${servicesPath}/v1/dict`,
+    url: `${servicesPath}/v1/allDictionary`,
     method: 'get',
 });
 const updatePassword = (data) => ({

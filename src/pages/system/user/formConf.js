@@ -25,8 +25,9 @@ const FormConf = (modalChange) => {
             name: "status",
             label: '用户状态',
             rules: [{ required: true, message: "用户状态不能为空" }],
+            initialValue: '1',
             fieldProps: {
-                componentType: "select",
+                componentType: "radio",
                 options: dictAllData?.status,
                 placeholder: "请选择用户状态",
             },
