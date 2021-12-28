@@ -79,6 +79,16 @@ const FormConf = (modalChange, allNotesClassData = []) => {
                 placeholder: "请输入文章内容",
             },
         },
+        {
+            className: "formItem",
+            name: "description",
+            label: '分类描述',
+            fieldProps: {
+                componentType: "textArea",
+                placeholder: "请输入分类描述",
+                maxLength: 30,
+            },
+        },
     ];
     const searchFormSchema = [
         {
@@ -95,6 +105,7 @@ const FormConf = (modalChange, allNotesClassData = []) => {
             name: "classification",
             label: '文章分类',
             fieldProps: {
+                mode: "multiple",
                 componentType: "select",
                 options: allNotesClassData,
                 placeholder: "请选择文章分类",

@@ -82,10 +82,12 @@ const Index = () => {
         form?.resetFields();
     };
     const getTableData = async () => {
+        const { classification, ...restProps } = searchFormData;
         const data = {
             current: pagination.current,
             pageSize: pagination.pageSize,
-            ...searchFormData
+            ...restProps,
+            classification: classification?.join()
         };
         const res = await tableRequestRes.run(data);
         if (res?.code === 200) {
