@@ -137,7 +137,7 @@ const Index = () => {
     };
 
     const exportUser = async () => {
-        window.message.warning('数据导出用时较长，请到浏览器下载列表中查看！', 6);
+        // window.message.warning('数据导出用时较长，请到浏览器下载列表中查看！', 6);
         const res = await exportUserRes.run(searchFormData);
         try {
             // 处理返回的文件流
