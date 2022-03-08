@@ -92,7 +92,6 @@ const Index = () => {
         getTableData();
     }, []);
 
-    console.log(isRouterVal, 'isRouterVal');
     const { columns, formSchema } = FormConf({ modalChange, formSchemaChange });
     return (
         <>

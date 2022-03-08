@@ -9,19 +9,6 @@ import { arrayToTree } from "@/utils/utils";
 import styles from '@/layouts/layouts.module.less';
 
 const { SubMenu } = Menu;
-//设置多级菜单默认展开数组
-const setMenuOpenKeys = pathname => {
-    const pathnames = pathname
-        .split('/')
-        .filter(v => v)
-        .map(s => '/' + s);
-    pathnames.pop();
-    const temp = [];
-    return pathnames.reduce((a, c) => {
-        temp.push(a + c);
-        return temp;
-    }, temp);
-};
 
 const Menus = ({ collapsed }) => {
     const navigate = useNavigate();
@@ -86,16 +73,35 @@ const Menus = ({ collapsed }) => {
         setSelectedKeys(target ? [pathname] : [openKeys[openKeys.length - 1]]);
     }, [collapsed, openKeys, pathname, menusList]);
 
-    useEffect(() => {
-        // 展开菜单
-        setOpenKeys(setMenuOpenKeys(pathname));
-    }, [collapsed, pathname]);
+    const filterFatherOpenKeys = (targetData, dataSource, targetOpenKeys = []) => {
+        if (targetData?.pid && targetData?.path && targetData.pid !== 0) {
+            const newData = dataSource.find(val => val.id === targetData.pid);
+            // 只有在栏目下(isRouter === 0)，添加
+            rootSubmenuKeys.includes(newData?.path) && targetOpenKeys.push(newData.path);
+            // targetOpenKeys.push(newData.path);
+            return filterFatherOpenKeys(newData, dataSource, targetOpenKeys);
+        } else {
+            return targetOpenKeys;
+        }
+    };
 
     useEffect(() => {
         // 可折叠项菜单
         const target = menusTree.filter(val => val.children).map(val => val.path);
         setRootSubmenuKeys(target);
     }, [menusList]);
+
+    useEffect(() => {
+        // pathname查找当前数据
+        const nowData = menusList.find(val => val.path === pathname);
+        // 根据数据递归找到所有父级
+        const openKeys = filterFatherOpenKeys(nowData, menusList);
+        console.log(openKeys, 'openKeys');
+        // 展开菜单
+        setOpenKeys(openKeys);
+    }, [collapsed, pathname]);
+
+
     const TMenuTriggerClass = classnames(
         styles['t-layout-sider-menu'],
         navigationMode?.menuTrigger && styles['t-layout-sider-menuTrigger']

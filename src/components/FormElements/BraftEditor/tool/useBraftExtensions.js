@@ -11,7 +11,7 @@ import CodeHighlighter from 'braft-extensions/dist/code-highlighter';
 // import 'prismjs/components/prism-tsx.min.js';
 
 import ColorPicker from 'braft-extensions/dist/color-picker';
-
+import Prism from 'prismjs';
 import MaxLength from 'braft-extensions/dist/max-length';
 
 const useBraftExtensions = ({ id, maxLengthNum }) => {
@@ -42,6 +42,11 @@ const useBraftExtensions = ({ id, maxLengthNum }) => {
             includeEditors: [id],
         }));
     };
+    Prism.hooks.add(id, function (env) {
+        env.element.innerHTML = env.element.innerHTML.replace(/<br\s*\/?>/g, '\n');
+        env.code = env.element.textContent.replace(/^(?:\r?\n|\r)/, '');
+    });
+    Prism.highlightAll();
     return braftExtensions;
 };
 
