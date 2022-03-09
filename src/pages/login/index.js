@@ -108,7 +108,8 @@ const Login = props => {
                     onFinish={onFinish}
                     initialValues={{
                         username: 'yanshi',
-                        password: '123456'
+                        password: '123456',
+                        code: '2',
                     }}
                 >
                     <FormItem>

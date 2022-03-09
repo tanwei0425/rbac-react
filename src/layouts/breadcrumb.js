@@ -35,8 +35,8 @@ const TBreadcrumb = (props) => {
   if (!navigationMode?.breadcrumb) {
     routes = targetMenuList.map((val, index) => {
       val.breadcrumbName = val.name;
-      // val.path = val.url;
-      index !== 0 && targetMenuList.length - 1 !== index && (val.href = true);
+      // 第一个面包屑、最后一个面包屑和栏目的面包屑不能点击
+      index !== 0 && targetMenuList.length - 1 !== index && val.isRouter === '1' && (val.href = true);
       return _.pick(val, ['breadcrumbName', 'path', 'href']);
     });
   }
@@ -70,7 +70,6 @@ const TBreadcrumb = (props) => {
           breadcrumb={{ routes, itemRender }}
         />
       </div>
-
   );
 };
 

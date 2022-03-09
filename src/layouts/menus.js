@@ -60,30 +60,44 @@ const Menus = ({ collapsed }) => {
         });
     };
 
-
     useEffect(() => {
         const newMenuTree = arrayToTree(menusList);
         const showMenuTree = newMenuTree?.filter(val => val.isShow === '1');
         setMenuTree(showMenuTree);
     }, []);
 
-    useEffect(() => {
-        // 非菜单路由选中父菜单
-        const target = menusList.filter(val => val.path === pathname)[0]?.isShow === '1';
-        setSelectedKeys(target ? [pathname] : [openKeys[openKeys.length - 1]]);
-    }, [collapsed, openKeys, pathname, menusList]);
+    const filterFatherSelectedKeys = (path, arr = []) => {
+        const nowRoter = menusList.find(item => item.path === path);
+        if (nowRoter?.isShow === '0') {
+            menusList.forEach(val => {
+                if (val.id === nowRoter.pid && val?.path) {
+                    val.isShow === '1' ? arr.push(val.path) : filterFatherSelectedKeys(val.path, arr);
+                }
+            });
+        } else {
+            arr.push(path);
+        }
+        return arr;
+    };
 
     const filterFatherOpenKeys = (targetData, dataSource, targetOpenKeys = []) => {
         if (targetData?.pid && targetData?.path && targetData.pid !== 0) {
             const newData = dataSource.find(val => val.id === targetData.pid);
             // 只有在栏目下(isRouter === 0)，添加
-            rootSubmenuKeys.includes(newData?.path) && targetOpenKeys.push(newData.path);
-            // targetOpenKeys.push(newData.path);
+            // rootSubmenuKeys.includes(newData?.path) && targetOpenKeys.push(newData.path);
+            targetOpenKeys.push(newData.path);
             return filterFatherOpenKeys(newData, dataSource, targetOpenKeys);
         } else {
             return targetOpenKeys;
         }
     };
+
+    useEffect(() => {
+        // 非菜单路由选中父菜单
+        const selectedKeys = filterFatherSelectedKeys(pathname);
+        setSelectedKeys(selectedKeys);
+    }, [collapsed, openKeys, menusList]);
+
 
     useEffect(() => {
         // 可折叠项菜单
@@ -96,7 +110,6 @@ const Menus = ({ collapsed }) => {
         const nowData = menusList.find(val => val.path === pathname);
         // 根据数据递归找到所有父级
         const openKeys = filterFatherOpenKeys(nowData, menusList);
-        console.log(openKeys, 'openKeys');
         // 展开菜单
         setOpenKeys(openKeys);
     }, [collapsed, pathname]);

@@ -101,6 +101,7 @@ const FormConf = ({ modalChange, formSchemaChange }) => {
             rules: [{ required: true, message: "组件路径不能为空" }],
             fieldProps: {
                 componentType: "input",
+                maxLength: 80,
                 placeholder: "请输入组件路径",
             },
         },

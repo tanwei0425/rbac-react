@@ -13,7 +13,7 @@ import { Button } from 'antd';
 const Index = (props) => {
     const navigate = useNavigate();
     return (
-        <Button type='primary' onClick={() => navigate('/twoDemoMenu')}>返回二级菜单1</Button>
+        <Button type='primary' onClick={() => navigate('/twoDemoMenu2/thereMenu2')}>返回三级菜单2</Button>
     );
 };
 

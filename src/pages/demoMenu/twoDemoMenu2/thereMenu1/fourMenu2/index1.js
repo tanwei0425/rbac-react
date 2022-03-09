@@ -6,14 +6,14 @@
  * @LastEditTime: 2021-02-07 09:28:21
  * @FilePath: /open-platform/src/pages/index/index.tsx
  */
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
 const Index = (props) => {
-    useEffect(() => {
-    }, []);
+    const navigate = useNavigate();
     return (
-        <Button type='primary' onClick={() => { }}>跳转内页2</Button>
+        <Button type='primary' onClick={() => navigate('/fourMenu2')}>返回四级菜单2</Button>
     );
 };
 
