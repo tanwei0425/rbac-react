@@ -4,7 +4,7 @@ import TableActionsRender from '@/components/WrapperTable/tableActionsRender';
 import { EditIcon, DeleteIcon } from '@/static/Icon';
 import { tableColumnToDict, dateTimeFormat } from '@/utils/utils';
 const FormConf = (modalChange, allNotesClassData = []) => {
-    const { dictAllData } = useSelector((state) => state.common);
+    const { dictAllData, userInfo } = useSelector((state) => state.common);
     const formSchema = [
         {
             className: "formItem",
@@ -55,6 +55,22 @@ const FormConf = (modalChange, allNotesClassData = []) => {
             fieldProps: {
                 componentType: "input",
                 placeholder: "请输入文章作者",
+            },
+        },
+        {
+            className: "formItem",
+            name: "readNumber",
+            label: '浏览次数',
+            initialValue: 0,
+            rules: [
+                { required: true, message: "浏览次数不能为空" },
+            ],
+            fieldProps: {
+                componentType: "inputNumber",
+                min: 0,
+                disabled: userInfo?.isAdmin !== 1,
+                max: 9999999,
+                placeholder: "请输入浏览次数",
             },
         },
         {

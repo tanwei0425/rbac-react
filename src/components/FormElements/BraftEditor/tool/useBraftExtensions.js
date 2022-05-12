@@ -20,13 +20,7 @@ const useBraftExtensions = ({ id, maxLengthNum }) => {
         BraftEditor.use(CodeHighlighter({
             includeEditors: [id],
             syntaxs: [
-                { name: 'HTML', syntax: 'html', },
-                { name: 'CSS', syntax: 'css' },
-                { name: 'LESS', syntax: 'less' },
                 { name: 'JavaScript', syntax: 'javascript' },
-                { name: 'React JSX', syntax: 'jsx' },
-                { name: 'TypeScript', syntax: 'typescript' },
-                { name: 'React TSX', syntax: 'tsx' },
             ]
         }));
 

@@ -55,8 +55,8 @@ export const initialState = {
     /** 系统个性化配置 */
     navigationMode: navigationModeIni,
 
-    // fullScreenLoading: !!token
-    fullScreenLoading: true
+    fullScreenLoading: !!token
+    // fullScreenLoading: true
 };
 
 function common(state = initialState, actions) {
