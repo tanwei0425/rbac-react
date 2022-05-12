@@ -58,7 +58,6 @@ const axiosConfig = () => {
             }
 
             const binaryStreamStatus = binaryStreamUrl.findIndex(val => val === config?.url);
-
             if (data?.code !== 200 && binaryStreamStatus === -1) {
                 window.message.error(data?.message);
             }
@@ -69,8 +68,11 @@ const axiosConfig = () => {
                     window.location.href = '/login';
                 }, 1000);
             }
-            // 二进制文件流请求更改responseType
-            if (binaryStreamStatus !== -1) {
+
+            /**
+             * 特殊处理二进制文件流请求开始
+             */
+            if (!data?.code && binaryStreamStatus !== -1) {
                 const contentDisposition = headers['content-disposition'];
                 let filename = contentDisposition?.split(";")[1]?.split("filename=")[1];
                 filename && (filename = decodeURIComponent(filename, "UTF-8"));
@@ -80,6 +82,13 @@ const axiosConfig = () => {
                 };
                 return resData;
             }
+            // 二进制流报错的message
+            if (data?.code && binaryStreamStatus !== -1) {
+                window.message.error(data?.message);
+            }
+            /**
+             * 特殊处理二进制文件流请求结束
+             */
             return data;
         },
         (error) => {
