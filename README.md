@@ -4,7 +4,9 @@
 
 一个可用于生产环境的基于 react、eggjs 的 rbac权限管理系统。
 
-线上地址：[预览](https://admin.hellotanwei.cn/login)
+线上地址：[预览](https://admin.hellotanwei.cn/login)  如果对您有一点帮助的，麻烦给下star 🌟 。 万分感谢～～～～
+
+因为穷，服务器特别low，初次加载可能需要浪费您宝贵的时间等上几秒。
 
 ## 技术栈
 
