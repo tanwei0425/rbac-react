@@ -56,7 +56,6 @@ const axiosConfig = () => {
                 const oldToken = getLocalStorageItem('token');
                 newToken !== oldToken && setLocalStorageItem('token', `Bearer ${newToken}`);
             }
-
             const binaryStreamStatus = binaryStreamUrl.findIndex(val => val === config?.url);
             if (data?.code !== 200 && binaryStreamStatus === -1) {
                 window.message.error(data?.message);
