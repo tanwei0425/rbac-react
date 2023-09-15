@@ -10,7 +10,7 @@
 
 ## 技术栈
 
-- React17（hooks、class）
+- React18（hooks、class）
 - React-router 6x
 - Redux 4x
 - Ant Design 4x
